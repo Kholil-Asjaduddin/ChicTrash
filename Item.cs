@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 
 namespace ChicTrash
 {
-    class Item
+    public class Item
     {
         //Properties
+        private int _itemId;
         private string _itemName;
         private string _category;
         private string _description;
         private double _price;
         private int _quantity;
 
+        public int ItemId
+        {
+            get { return _itemId; }
+            set { _itemId = value; }
+        }
         public string ItemName
         {
             get { return _itemName; }
