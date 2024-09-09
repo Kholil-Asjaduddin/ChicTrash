@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace ChicTrash
 {
-    internal class User
+    public class User
     {
+        //Properties
+        private int _userId;
         private string _userName;
         private string _userEmail;
         private string _userPassword;
         private string _userPhone;
         private string _userAdress;
         private double _userMoney;
-        private int _userId;
+        
 
         public string UserName
         {
@@ -54,6 +56,7 @@ namespace ChicTrash
             set { _userId = value; }
         }
 
+        //Method
         public Boolean Login(string userName, string userPassword)
         {
             if (userName == "hoho" & userPassword == "000")
