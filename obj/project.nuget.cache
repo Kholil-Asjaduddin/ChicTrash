@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "awPlMKVq8QvWijuZRWnqvWAv2AMtkG0lE7HpVgHTlRpwaVdn6AyvYAl35XDmy+Mw5OpfaSP1NB9jTlpCKN2dbA==",
+  "dgSpecHash": "mdD4DL8Ge3A=",
   "success": true,
-  "projectFilePath": "D:\\UGM\\Project\\Semester 5\\Junior Project\\ChicTrash\\ChicTrash.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "K:\\ChicTrash_app\\ChicTrash.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\M S I\\.nuget\\packages\\excss\\4.2.3\\excss.4.2.3.nupkg.sha512",
+    "C:\\Users\\M S I\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\M S I\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\M S I\\.nuget\\packages\\svg\\3.4.7\\svg.3.4.7.nupkg.sha512",
+    "C:\\Users\\M S I\\.nuget\\packages\\system.drawing.common\\5.0.3\\system.drawing.common.5.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
