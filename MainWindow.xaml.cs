@@ -20,5 +20,9 @@ namespace ChicTrash
         {
             InitializeComponent();
         }
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+          
+        }
     }
 }
