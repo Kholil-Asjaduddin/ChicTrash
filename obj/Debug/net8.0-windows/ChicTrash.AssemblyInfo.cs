@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChicTrash")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78af7fc49a215298cef3e47255697d5fb8d6d633")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9587dc5921949fab4f75c81d27120dabaec1789")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChicTrash")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChicTrash")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
