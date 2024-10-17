@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChicTrash"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="ChicTrash: Login" Height="1080" Width="1920">
     <Grid>
         
         <!-- Define row definitions for the main grid -->
@@ -17,7 +17,7 @@
         <!-- Define some content for the first row -->
         <Border Grid.Column="0" >
             <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,0.90">
+                <LinearGradientBrush StartPoint="0,0.73" EndPoint="0,1">
                     <LinearGradientBrush.GradientStops>
                         <GradientStop Offset="0.1" Color="#00BEBE" />
                         <GradientStop Offset="1" Color="#2C8698" />
@@ -42,7 +42,7 @@
                 </TextBlock>
             </Grid>
         </Border>
-        <Border Grid.Column="1" Background="#D9D9D9">
+        <Border Grid.Column="1" Background="#FFFFFF">
            <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"></Frame>
         </Border>
         </Grid>

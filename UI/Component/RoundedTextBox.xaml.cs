@@ -19,4 +19,14 @@ public partial class RoundedTextBox : UserControl
         get { return (string)GetValue(TextProperty); }
         set { SetValue(TextProperty, value); }
     }
+    
+    public static readonly DependencyProperty PlaceholderProperty =
+        DependencyProperty.Register("Placeholder", typeof(string), typeof(RoundedTextBox), 
+            new PropertyMetadata(string.Empty));
+
+    public string Placeholder
+    {
+        get { return (string)GetValue(PlaceholderProperty); }
+        set { SetValue(PlaceholderProperty, value); }
+    }
 }

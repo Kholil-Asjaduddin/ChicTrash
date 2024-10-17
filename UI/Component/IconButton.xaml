@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ChicTrash.UI.Component.IconButton"
+             x:Name="RootControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="60" d:DesignWidth="120">
+    <Button
+            Background="{Binding ButtonBackground, ElementName=RootControl}"
+            Foreground="{Binding ButtonForeground, ElementName=RootControl}"
+            Click="IconButton_Click"
+            Padding="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="{Binding IconSource, ElementName=RootControl}"
+                   Width="20" Height="20" 
+                   Margin="0,0,10,0"/>
+            <TextBlock Text="{Binding ButtonText, ElementName=RootControl}"/>
+        </StackPanel>
+    </Button>
+</UserControl>

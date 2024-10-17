@@ -3,20 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ChicTrash.UI.Component"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+
     <Border CornerRadius="20" 
             BorderBrush="#FFB0B0B0" 
             BorderThickness="1" 
             Background="White">
-        <TextBox Width="{Binding Width, ElementName=RoundedTextBoxControl}" 
-                 Height="{Binding Height, ElementName=RoundedTextBoxControl}" 
-                 Margin="0" 
-                 Padding="10" 
-                 Background="Transparent" 
-                 BorderThickness="0" 
-                 Text="{Binding Text, ElementName=RoundedTextBoxControl, Mode=TwoWay}" 
-                 />
+        
+        <!-- Use a Grid to hold both TextBlock and TextBox -->
+        <Grid>
+            <!-- Placeholder TextBlock -->
+            <TextBlock Text="{Binding Placeholder, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"            
+                       Foreground="Gray"                    
+                       Margin="10"                          
+                       VerticalAlignment="Center"
+                       IsHitTestVisible="False"              
+                       Visibility="{Binding Text.IsEmpty, ElementName=TextBoxPart, Converter={StaticResource BooleanToVisibilityConverter}}"
+            />
+
+            <!-- The TextBox -->
+            <TextBox x:Name="TextBoxPart"
+                     Width="{Binding Width, ElementName=RoundedTextBoxControl}" 
+                     Height="{Binding Height, ElementName=RoundedTextBoxControl}" 
+                     Margin="0" 
+                     Padding="10" 
+                     Background="Transparent" 
+                     BorderThickness="0" 
+                     VerticalContentAlignment="Center"
+                     Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}" 
+            />
+        </Grid>
     </Border>
 </UserControl>

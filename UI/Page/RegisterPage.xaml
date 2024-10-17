@@ -1,4 +1,4 @@
-﻿<Page x:Class="ChicTrash.UI.Page.LoginPage"
+﻿<Page x:Class="ChicTrash.UI.Page.RegisterPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:ChicTrash.UI.Page"
       xmlns:component="clr-namespace:ChicTrash.UI.Component"
       mc:Ignorable="d"
-      Title="LoginPage" Height="1080" Width="960">
-    <Grid Background="#FFFFFF">
-        <Grid.RowDefinitions>
+      Title="RegisterPage" Height="1080" Width="960">
+    <Grid
+        Background="#FFFFFF">
+    <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition> 
@@ -18,19 +19,24 @@
         </Grid.RowDefinitions>
         <TextBlock  Margin="50,20,0,0" FontSize="36" FontWeight="Bold" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Foreground="#000000">
             <TextBlock.RenderTransform>
-                <TranslateTransform X="110" Y="190"></TranslateTransform>
+                <TranslateTransform X="110" Y="160"></TranslateTransform>
             </TextBlock.RenderTransform>
-            Hello Again!
+            Are You New?
         </TextBlock>
         <TextBlock Margin="50,20,0,0" FontSize="32" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
             <TextBlock.RenderTransform>
-                <TranslateTransform X="115" Y="240"></TranslateTransform>
+                <TranslateTransform X="0" Y="200"></TranslateTransform>
             </TextBlock.RenderTransform>
-            Welcome Back
+            Start Shopping Sustainably Today
         </TextBlock>
+        <component:RoundedTextBox HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Username" Height="40" >
+            <component:RoundedTextBox.RenderTransform>
+                <TranslateTransform X="120" Y="200" />
+            </component:RoundedTextBox.RenderTransform>
+        </component:RoundedTextBox>
         <component:RoundedTextBox HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Email" Height="40" >
             <component:RoundedTextBox.RenderTransform>
-                <TranslateTransform X="120" Y="240" />
+                <TranslateTransform X="120" Y="250" />
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
         <component:RoundedTextBox HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Password" Height="40">
@@ -38,22 +44,23 @@
                 <TranslateTransform X="120" Y="120" />
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
+        <component:RoundedTextBox HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Confirm Password" Height="40">
+            <component:RoundedTextBox.RenderTransform>
+                <TranslateTransform X="120" Y="170" />
+            </component:RoundedTextBox.RenderTransform>
+        </component:RoundedTextBox>
         
-        <component:RoundedButton ButtonText="Login" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="28" FontWeight="DemiBold" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" Click="RoundedButton_OnClick">
+        <component:RoundedButton ButtonText="Register" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="28" FontWeight="DemiBold" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" Click="RoundedButton_OnClick">
             <component:RoundedButton.RenderTransform>
-                <TranslateTransform X="-210" Y="370"></TranslateTransform>
+                <TranslateTransform X="-210" Y="410"></TranslateTransform>
             </component:RoundedButton.RenderTransform>
         </component:RoundedButton>
         
-        <component:HyperlinkButton ForegroundColor="#2BC499" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Text="Forgot Password?" Grid.Row="0" Click="TestClick">
+        <component:HyperlinkButton ForegroundColor="#2BC499" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Text="Already Have An Account?" Grid.Row="0" Click="RoundedButton_OnClick">
             <component:HyperlinkButton.RenderTransform>
-                <TranslateTransform X="-210" Y="420"></TranslateTransform>
+                <TranslateTransform X="-210" Y="450"></TranslateTransform>
             </component:HyperlinkButton.RenderTransform>
         </component:HyperlinkButton>
-        <component:HyperlinkButton ForegroundColor="#2BC499" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Text="Don't Have An Account?" Grid.Row="0" Click="TestClick">
-            <component:HyperlinkButton.RenderTransform>
-                <TranslateTransform X="-210" Y="445"></TranslateTransform>
-            </component:HyperlinkButton.RenderTransform>
-        </component:HyperlinkButton>
+        
     </Grid>
 </Page>
