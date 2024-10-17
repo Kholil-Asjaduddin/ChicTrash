@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ChicTrash.UI.Page;
 
 namespace ChicTrash
 {
@@ -19,6 +20,7 @@ namespace ChicTrash
         public MainWindow()
         {
             InitializeComponent();
+            ContentFrame.Navigate(new LoginPage());
         }
     }
 }

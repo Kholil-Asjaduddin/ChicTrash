@@ -11,7 +11,7 @@
         <!-- Define row definitions for the main grid -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="960"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <!-- Define some content for the first row -->
@@ -33,17 +33,17 @@
             
                 <Image Grid.Row="0" Panel.ZIndex="1" Source="../Images/earth-green-svgrepo-com.png" Margin="160,0,0,0"></Image>
                 
-                <TextBlock Panel.ZIndex= "2" Grid.Row="1"  HorizontalAlignment="Center" Foreground="White" FontSize="40" FontWeight="Bold" FontFamily="Poppins" Margin="0,0,0,50">ChicTrash</TextBlock>
-                <TextBlock Grid.Row="2"  HorizontalAlignment="Center" FontSize="33" Foreground="White" TextAlignment="Center" FontFamily="Poppins" FontWeight="SemiBold" Margin="0,0,0,100">
+                <TextBlock Panel.ZIndex= "2" Grid.Row="1"  HorizontalAlignment="Center" Foreground="White" FontSize="40" FontWeight="Bold" FontFamily="../Fonts/Poppins-Bold.ttf" Margin="0,0,0,50">ChicTrash</TextBlock>
+                <TextBlock Grid.Row="2"  HorizontalAlignment="Center" FontSize="33" Foreground="White" TextAlignment="Center" FontFamily="../Fonts/Poppins-SemiBold.ttf" FontWeight="SemiBold" Margin="0,0,0,100">
                     <TextBlock.RenderTransform>
-                        <TranslateTransform X="0" Y="-45" /> <!-- Move upwards by 10 units -->
+                        <TranslateTransform X="0" Y="-45" />
                     </TextBlock.RenderTransform>
                     Sustainable shopping for a <LineBreak/>better tomorrow.
                 </TextBlock>
             </Grid>
         </Border>
-        <Border Grid.Column="1" Background="#EEEEEE">
-           
+        <Border Grid.Column="1" Background="#D9D9D9">
+           <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"></Frame>
         </Border>
         </Grid>
 </Window>
