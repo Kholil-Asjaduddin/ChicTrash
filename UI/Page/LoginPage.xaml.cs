@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-
+using ChicTrash.UI.Windows;
 
 
 namespace ChicTrash.UI.Page;
@@ -18,8 +18,8 @@ public partial class LoginPage : System.Windows.Controls.Page
 
     private void RoundedButton_OnClick(object sender, RoutedEventArgs e)
     {
-        
-        _navigate(new RegisterPage(_navigate));
+
+        Window home = new Home();
     }
 
     private void TestClick(object sender, RoutedEventArgs e)

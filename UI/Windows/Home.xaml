@@ -21,11 +21,13 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="100px"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock> Hello World!</TextBlock>
-                <component:IconButton> </component:IconButton>
-                <component:IconButton Grid.Row="0"> </component:IconButton>
-                <component:IconButton Grid.Row="1" IconSource="https://example.com/path/to/icon.png"></component:IconButton>
-        </Grid>
+                <component:IconButton Grid.Row="1" ButtonBackground="#00BEBE" HoverBackground="#039393"></component:IconButton>
+                <component:IconButton Grid.Row="0" IconSource="../Images/home-4-svgrepo-com.png" ButtonBackground="#00BEBE" Click="IconButton_OnClick" HoverBackground="#039393"></component:IconButton>
+                <component:IconButton Grid.Row="2" ButtonBackground="#00BEBE" HoverBackground="#039393"></component:IconButton>
+
+            </Grid>
         </Border>
+        <Frame Grid.Column="1" x:Name="ContentFrame" NavigationUIVisibility="Hidden"></Frame>
+
     </Grid>
 </Window>

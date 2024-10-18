@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="ChicTrash.UI.Component.ItemCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ChicTrash.UI.Component"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border CornerRadius="15" BorderBrush="LightGray" BorderThickness="2" Background="White" Padding="10">
+        <Grid>
+            <!-- Define rows to split between icon and text -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />  <!-- Icon Section -->
+                <RowDefinition Height="Auto" /> <!-- Text Section -->
+            </Grid.RowDefinitions>
+
+            <!-- Icon Section (top) -->
+            <Border Background="#D5D5D5" CornerRadius="15,15,0,0" Grid.Row="0" Margin="-11,-13,-11,40">
+                <Image Source="../Images/icon-svgrepo-com.png" 
+                       Width="50" Height="50" 
+                       Stretch="Uniform"/>
+            </Border>
+
+            <!-- Text Section (bottom) -->
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                <TextBlock Text="Lorem" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" >
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="-40"></TranslateTransform>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="Ipsum" FontSize="16" HorizontalAlignment="Center" >
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="-40"></TranslateTransform>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

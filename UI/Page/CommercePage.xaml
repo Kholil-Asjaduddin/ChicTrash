@@ -1,0 +1,84 @@
+﻿<Page x:Class="ChicTrash.UI.Page.CommercePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ChicTrash.UI.Page"
+      xmlns:component="clr-namespace:ChicTrash.UI.Component"
+      mc:Ignorable="d"
+      Title="CommercePage" Height="1080" Width="1720">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <component:RoundedTextBox Width="878" Height="40">
+            <component:RoundedTextBox.RenderTransform>
+                <TranslateTransform X="-130" Y="-100"></TranslateTransform>
+            </component:RoundedTextBox.RenderTransform>
+        </component:RoundedTextBox>
+        <TextBlock Grid.Row="1" Text="Waste" FontSize="24" FontWeight="Bold" Margin="10" >
+            <TextBlock.RenderTransform>
+                <TranslateTransform X="275" Y="-200"></TranslateTransform>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Separator Grid.Row="2" Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
+            <Separator.RenderTransform>
+                <TranslateTransform X="-135" Y="-555"></TranslateTransform>
+            </Separator.RenderTransform>
+        </Separator>
+        
+        <!-- Card Layout -->
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="700">
+            <ScrollViewer.RenderTransform>
+                <TranslateTransform Y="-500"></TranslateTransform>
+            </ScrollViewer.RenderTransform>
+            <WrapPanel ItemWidth="150" Width="960" Height="500">
+                <WrapPanel.RenderTransform>
+                    <TranslateTransform X="-110" ></TranslateTransform>
+                </WrapPanel.RenderTransform>
+                <!-- Example cards with Margin for spacing -->
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <!-- Add more cards as needed -->
+            </WrapPanel>
+        </ScrollViewer>
+        <TextBlock FontSize="24" FontWeight="Bold" Margin="10" >
+            <TextBlock.RenderTransform>
+                <TranslateTransform X="275" Y="325"></TranslateTransform>
+            </TextBlock.RenderTransform>
+            Recycled Items
+        </TextBlock>
+        <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
+            <Separator.RenderTransform>
+                <TranslateTransform X="-135" Y="250"></TranslateTransform>
+            </Separator.RenderTransform>
+            </Separator>
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" Height="700">
+            <ScrollViewer.RenderTransform>
+          add       <TranslateTransform Y="-225"></TranslateTransform>
+            </ScrollViewer.RenderTransform>
+            <WrapPanel ItemWidth="150" Width="960" Height="500">
+                <WrapPanel.RenderTransform>
+                    <TranslateTransform X="-110" ></TranslateTransform>
+                </WrapPanel.RenderTransform>
+                <!-- Example cards with Margin for spacing -->
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+               
+                <!-- Add more cards as needed -->
+            </WrapPanel>
+        </ScrollViewer>
+    
+    </Grid>
+</Page>

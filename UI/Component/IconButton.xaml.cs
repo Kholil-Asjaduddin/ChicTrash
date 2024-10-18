@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace ChicTrash.UI.Component
 {
@@ -12,21 +11,9 @@ namespace ChicTrash.UI.Component
             InitializeComponent();
         }
 
-        // DependencyProperty for ButtonText
-        public static readonly DependencyProperty ButtonTextProperty =
-            DependencyProperty.Register("ButtonText", typeof(string), typeof(IconButton),
-                new PropertyMetadata(string.Empty));
-
-        public string ButtonText
-        {
-            get { return (string)GetValue(ButtonTextProperty); }
-            set { SetValue(ButtonTextProperty, value); }
-        }
-
-        // DependencyProperty for IconSource (image path)
+        // Dependency property for the Icon Source
         public static readonly DependencyProperty IconSourceProperty =
-            DependencyProperty.Register("IconSource", typeof(ImageSource), typeof(IconButton),
-                new PropertyMetadata(null));
+            DependencyProperty.Register("IconSource", typeof(ImageSource), typeof(IconButton), new PropertyMetadata(null));
 
         public ImageSource IconSource
         {
@@ -34,10 +21,9 @@ namespace ChicTrash.UI.Component
             set { SetValue(IconSourceProperty, value); }
         }
 
-        // DependencyProperty for ButtonBackground
+        // Dependency property for the Button Background
         public static readonly DependencyProperty ButtonBackgroundProperty =
-            DependencyProperty.Register("ButtonBackground", typeof(Brush), typeof(IconButton),
-                new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register("ButtonBackground", typeof(Brush), typeof(IconButton), new PropertyMetadata(Brushes.LightGray));
 
         public Brush ButtonBackground
         {
@@ -45,23 +31,23 @@ namespace ChicTrash.UI.Component
             set { SetValue(ButtonBackgroundProperty, value); }
         }
 
-        // DependencyProperty for ButtonForeground
-        public static readonly DependencyProperty ButtonForegroundProperty =
-            DependencyProperty.Register("ButtonForeground", typeof(Brush), typeof(IconButton),
-                new PropertyMetadata(Brushes.Black));
+        // Dependency property for the Hover Background
+        public static readonly DependencyProperty HoverBackgroundProperty =
+            DependencyProperty.Register("HoverBackground", typeof(Brush), typeof(IconButton), new PropertyMetadata(Brushes.Gray));
 
-        public Brush ButtonForeground
+        public Brush HoverBackground
         {
-            get { return (Brush)GetValue(ButtonForegroundProperty); }
-            set { SetValue(ButtonForegroundProperty, value); }
+            get { return (Brush)GetValue(HoverBackgroundProperty); }
+            set { SetValue(HoverBackgroundProperty, value); }
         }
-
-        // Click event handler
+        
+        // Event for handling the click event
         public event RoutedEventHandler Click;
 
-        private void IconButton_Click(object sender, RoutedEventArgs e)
+        // Click event handler
+        private void OnClick(object sender, RoutedEventArgs e)
         {
-            Click?.Invoke(this, e);
+            Click?.Invoke(this, e); // Raise the Click event to allow parent to handle it
         }
     }
 }

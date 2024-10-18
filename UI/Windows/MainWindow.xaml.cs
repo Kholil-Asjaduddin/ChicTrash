@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChicTrash.UI.Page;
+using ChicTrash.UI.Windows;
 
 namespace ChicTrash
 {
