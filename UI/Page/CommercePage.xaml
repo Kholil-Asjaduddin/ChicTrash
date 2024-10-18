@@ -21,19 +21,19 @@
         </component:RoundedTextBox>
         <TextBlock Grid.Row="1" Text="Waste" FontSize="24" FontWeight="Bold" Margin="10" >
             <TextBlock.RenderTransform>
-                <TranslateTransform X="275" Y="-200"></TranslateTransform>
+                <TranslateTransform X="275" Y="100"></TranslateTransform>
             </TextBlock.RenderTransform>
         </TextBlock>
         <Separator Grid.Row="2" Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
             <Separator.RenderTransform>
-                <TranslateTransform X="-135" Y="-555"></TranslateTransform>
+                <TranslateTransform X="-135" Y="-255"></TranslateTransform>
             </Separator.RenderTransform>
         </Separator>
         
         <!-- Card Layout -->
         <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="700">
             <ScrollViewer.RenderTransform>
-                <TranslateTransform Y="-500"></TranslateTransform>
+                <TranslateTransform Y="-200"></TranslateTransform>
             </ScrollViewer.RenderTransform>
             <WrapPanel ItemWidth="150" Width="960" Height="500">
                 <WrapPanel.RenderTransform>
@@ -51,18 +51,18 @@
         </ScrollViewer>
         <TextBlock FontSize="24" FontWeight="Bold" Margin="10" >
             <TextBlock.RenderTransform>
-                <TranslateTransform X="275" Y="325"></TranslateTransform>
+                <TranslateTransform X="275" Y="625"></TranslateTransform>
             </TextBlock.RenderTransform>
             Recycled Items
         </TextBlock>
         <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
             <Separator.RenderTransform>
-                <TranslateTransform X="-135" Y="250"></TranslateTransform>
+                <TranslateTransform X="-135" Y="550"></TranslateTransform>
             </Separator.RenderTransform>
             </Separator>
         <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" Height="700">
             <ScrollViewer.RenderTransform>
-                <TranslateTransform Y="-225"></TranslateTransform>
+                <TranslateTransform Y="75"></TranslateTransform>
             </ScrollViewer.RenderTransform>
             <WrapPanel ItemWidth="150" Width="960" Height="500">
                 <WrapPanel.RenderTransform>
@@ -79,6 +79,10 @@
                 <!-- Add more cards as needed -->
             </WrapPanel>
         </ScrollViewer>
-    
+    <component:Carousel Margin="0,0,378,0">
+        <component:Carousel.RenderTransform>
+            <TranslateTransform Y="100"></TranslateTransform>
+        </component:Carousel.RenderTransform>
+    </component:Carousel>
     </Grid>
 </Page>

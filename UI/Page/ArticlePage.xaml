@@ -1,0 +1,28 @@
+﻿<Page x:Class="ChicTrash.UI.Page.ArticlePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ChicTrash.UI.Page"
+      xmlns:component="clr-namespace:ChicTrash.UI.Component"
+      mc:Ignorable="d"
+      Title="ArticlePage" Height="1080" Width="1720">
+    <Grid>
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" Height="700">
+            <ScrollViewer.RenderTransform>
+                <TranslateTransform Y="-100"></TranslateTransform>
+            </ScrollViewer.RenderTransform>
+            <WrapPanel ItemWidth="900" ItemHeight="500" Width="960" Height="1000">
+                <WrapPanel.RenderTransform>
+                    <TranslateTransform X="-110" ></TranslateTransform>
+                </WrapPanel.RenderTransform>
+                <!-- Example cards with Margin for spacing -->
+                <component:ItemCard Margin="10" />
+                <component:ItemCard Margin="10" />
+
+                
+                <!-- Add more cards as needed -->
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
