@@ -23,7 +23,7 @@
             </TextBlock.RenderTransform>
             Are You New?
         </TextBlock>
-        <TextBlock Margin="50,20,0,0" FontSize="32" FontWeight="DemiBold" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
+        <TextBlock Margin="50,20,0,0" FontSize="32" FontWeight="DemiBoldgit" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
             <TextBlock.RenderTransform>
                 <TranslateTransform X="0" Y="200"></TranslateTransform>
             </TextBlock.RenderTransform>

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChicTrash"
         mc:Ignorable="d"
-        Title="ChicTrash: Login" Height="1080" Width="1920">
+        Title="ChicTrash: Login" Height="1080" Width="1920"
+        ResizeMode="NoResize">
     <Grid>
         
         <!-- Define row definitions for the main grid -->

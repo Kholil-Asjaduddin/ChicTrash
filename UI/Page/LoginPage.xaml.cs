@@ -19,7 +19,8 @@ public partial class LoginPage : System.Windows.Controls.Page
     private void RoundedButton_OnClick(object sender, RoutedEventArgs e)
     {
 
-        Window home = new Home();
+        Home Home = new Home();
+        Home.Show();
     }
 
     private void TestClick(object sender, RoutedEventArgs e)
