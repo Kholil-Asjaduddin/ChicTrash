@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ChicTrash.UI.Component"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Border CornerRadius="15" BorderBrush="LightGray" BorderThickness="2" Background="White" Padding="10">
+    <Border CornerRadius="15" BorderBrush="LightGray" BorderThickness="2" Background="White" Padding="10" Cursor="Hand">
         <Grid>
             <!-- Define rows to split between icon and text -->
             <Grid.RowDefinitions>

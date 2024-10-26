@@ -38,4 +38,12 @@ public partial class ItemCard : UserControl
         get { return (string)GetValue(BottomTextProperty); }
         set { SetValue(BottomTextProperty, value); }
     }
+    
+    public event RoutedEventHandler Click;
+
+    // Click event handler
+    private void OnClick(object sender, RoutedEventArgs e)
+    {
+        Click?.Invoke(this, e); // Raise the Click event to allow parent to handle it
+    }
 }

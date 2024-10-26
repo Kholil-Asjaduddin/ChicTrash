@@ -32,7 +32,7 @@ namespace ChicTrash.UI.Component
             get { return (Brush)GetValue(ForegroundColorProperty); }
             set { SetValue(ForegroundColorProperty, value); }
         }
-
+        
         // Event for handling the click event
         public event RoutedEventHandler Click;
 
