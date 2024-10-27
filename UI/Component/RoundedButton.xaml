@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="ChicTrash.UI.Component.RoundedButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="100" d:DesignWidth="200">
+
+    <Button x:Name="RoundedButtonControl"
+            Width="200" 
+            Height="50" 
+            Foreground="White" 
+            BorderThickness="0" 
+            Content="{Binding ButtonText, RelativeSource={RelativeSource AncestorType=UserControl}}"
+            Cursor="Hand"  
+            Click="OnButtonClick">
+        <Button.Template>
+            <ControlTemplate TargetType="Button">
+                <Border x:Name="Border"
+                        Background="{TemplateBinding Background}" 
+                        CornerRadius="25"
+                        BorderBrush="Transparent" 
+                        BorderThickness="0">
+                    <ContentPresenter HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="Border" Property="Background" Value="{Binding ButtonBackgroundHover, RelativeSource={RelativeSource AncestorType=UserControl}}"/> <!-- Change color on hover -->
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="False">
+                        <Setter TargetName="Border" Property="Background" Value="{Binding ButtonBackground, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
+</UserControl>

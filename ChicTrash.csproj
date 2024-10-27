@@ -6,6 +6,117 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>UI\Images\earth-green-svgrepo-com.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Component\RoundedTextBox.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UI\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="UI\Images\earth-green-svgrepo-com.png" />
+    <Content Include="UI\Images\earth-green-svgrepo-com.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-Black.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-Black.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-BlackItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-Bold.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-BoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-ExtraBold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-ExtraBoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-ExtraLight.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-ExtraLightItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-Italic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-Italic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-Light.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-LightItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-LightItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-Medium.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-Medium.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-MediumItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-Regular.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-SemiBold.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-SemiBold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-SemiBoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-Thin.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-Thin.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Fonts\Poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="UI\Fonts\Poppins\Poppins-ThinItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Images\home-4-svgrepo-com.png" />
+    <Content Include="UI\Images\home-4-svgrepo-com.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Images\books-supplies-svgrepo-com.png" />
+    <Content Include="UI\Images\books-supplies-svgrepo-com.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Remove="UI\Images\cart-3-svgrepo-com.png" />
+    <Content Include="UI\Images\cart-3-svgrepo-com.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="8.0.5" />
+  </ItemGroup>
 
 </Project>
