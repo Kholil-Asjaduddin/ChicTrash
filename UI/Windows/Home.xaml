@@ -22,7 +22,7 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="100px"></RowDefinition>
                 </Grid.RowDefinitions>
-                <component:IconButton Grid.Row="1" ButtonBackground="#00BEBE" IconSource="../Images/cart-3-svgrepo-com.png" HoverBackground="#039393" Click="IconButton2_OnClick"></component:IconButton>
+                <component:IconButton Grid.Row="1" ButtonBackground="#00BEBE" IconSource="../Images/cart-3-svgrepo-com.png" HoverBackground="#039393" Click="IconButton2_OnClick" Loaded="IconButton_Loaded"></component:IconButton>
                 <component:IconButton Grid.Row="0" IconSource="../Images/home-4-svgrepo-com.png" ButtonBackground="#00BEBE" Click="IconButton_OnClick" HoverBackground="#039393"></component:IconButton>
                 <component:IconButton Grid.Row="2" IconSource="../Images/books-supplies-svgrepo-com.png" ButtonBackground="#00BEBE" HoverBackground="#039393" Click="IconButton3_OnClick"></component:IconButton>
 

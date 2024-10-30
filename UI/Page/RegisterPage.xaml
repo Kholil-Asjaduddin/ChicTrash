@@ -23,23 +23,23 @@
             </TextBlock.RenderTransform>
             Are You New?
         </TextBlock>
-        <TextBlock Margin="50,20,0,0" FontSize="32" FontWeight="DemiBoldgit" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
+        <TextBlock Margin="50,20,0,0" FontSize="32" FontWeight="DemiBold" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
             <TextBlock.RenderTransform>
                 <TranslateTransform X="0" Y="200"></TranslateTransform>
             </TextBlock.RenderTransform>
             Start Shopping Sustainably Today
         </TextBlock>
-        <component:RoundedTextBox HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Username" Height="40" >
+        <component:RoundedTextBox x:Name="UsernameTxtBox" HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Username" Height="40" >
             <component:RoundedTextBox.RenderTransform>
                 <TranslateTransform X="120" Y="200" />
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
-        <component:RoundedTextBox HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Email" Height="40" >
+        <component:RoundedTextBox x:Name="EmailTxtBox" HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Email" Height="40" >
             <component:RoundedTextBox.RenderTransform>
                 <TranslateTransform X="120" Y="250" />
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
-        <component:RoundedTextBox HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Password" Height="40">
+        <component:RoundedTextBox x:Name="PasswordTxtBox" HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Password" Height="40">
             <component:RoundedTextBox.RenderTransform>
                 <TranslateTransform X="120" Y="120" />
             </component:RoundedTextBox.RenderTransform>

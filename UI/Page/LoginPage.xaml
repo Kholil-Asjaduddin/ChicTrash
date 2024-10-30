@@ -28,12 +28,12 @@
             </TextBlock.RenderTransform>
             Welcome Back
         </TextBlock>
-        <component:RoundedTextBox HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Email" Height="40" >
+        <component:RoundedTextBox x:Name="EmailTxtBox" HorizontalAlignment="Left" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Margin="50,0,0,0" Grid.Row="0" Width="200" Placeholder="Email" Height="40" >
             <component:RoundedTextBox.RenderTransform>
                 <TranslateTransform X="120" Y="240" />
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
-        <component:RoundedTextBox HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Password" Height="40">
+        <component:RoundedTextBox x:Name="PasswordTxtBox" HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Password" Height="40">
             <component:RoundedTextBox.RenderTransform>
                 <TranslateTransform X="120" Y="120" />
             </component:RoundedTextBox.RenderTransform>

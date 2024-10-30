@@ -36,7 +36,9 @@
                      BorderThickness="0" 
                      VerticalContentAlignment="Center"
                      Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}" 
-            />
+            >
+                
+            </TextBox>
         </Grid>
     </Border>
 </UserControl>
