@@ -8,7 +8,7 @@ public partial class Home : Window
     public Home()
     {
         InitializeComponent();
-        ContentFrame.Navigate(new HomePage());
+        ContentFrame.Navigate(new ItemPage());
     }
 
    
@@ -27,5 +27,10 @@ public partial class Home : Window
     private void IconButton3_OnClick(object sender, RoutedEventArgs e)
     {
         ContentFrame.Navigate(new ArticlePage());
+    }
+
+    private void IconButton_Loaded(object sender, RoutedEventArgs e)
+    {
+
     }
 }
