@@ -7,17 +7,11 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="test\Product.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="UI\Page\CartList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="test\Product.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="UI\Page\CartList.xaml">
       <SubType>Designer</SubType>
     </Page>

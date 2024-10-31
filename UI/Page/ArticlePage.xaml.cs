@@ -8,4 +8,4 @@ public partial class ArticlePage : System.Windows.Controls.Page
     {
         InitializeComponent();
     }
-}
+} 
