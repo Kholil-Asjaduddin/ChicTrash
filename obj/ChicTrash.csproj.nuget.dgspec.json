@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Junpro\\ChicTrash\\Solution1\\ChicTrash\\ChicTrash.csproj": {}
+    "K:\\ChicTrash_app\\ChicTrash.csproj": {}
   },
   "projects": {
-    "E:\\Junpro\\ChicTrash\\Solution1\\ChicTrash\\ChicTrash.csproj": {
+    "K:\\ChicTrash_app\\ChicTrash.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Junpro\\ChicTrash\\Solution1\\ChicTrash\\ChicTrash.csproj",
+        "projectUniqueName": "K:\\ChicTrash_app\\ChicTrash.csproj",
         "projectName": "ChicTrash",
-        "projectPath": "E:\\Junpro\\ChicTrash\\Solution1\\ChicTrash\\ChicTrash.csproj",
-        "packagesPath": "C:\\Users\\asus\\.nuget\\packages\\",
-        "outputPath": "E:\\Junpro\\ChicTrash\\Solution1\\ChicTrash\\obj\\",
+        "projectPath": "K:\\ChicTrash_app\\ChicTrash.csproj",
+        "packagesPath": "C:\\Users\\M S I\\.nuget\\packages\\",
+        "outputPath": "K:\\ChicTrash_app\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\asus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\M S I\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,12 +39,21 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Npgsql": {
               "target": "Package",
               "version": "[8.0.5, )"
@@ -62,7 +78,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
