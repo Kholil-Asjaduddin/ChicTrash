@@ -10,44 +10,28 @@ namespace ChicTrash.UI.Page;
 public partial class LoginPage : System.Windows.Controls.Page
 {
     private readonly Action<System.Windows.Controls.Page> _navigate;
-    public static string connstring = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING");
-    public NpgsqlConnection conn = new NpgsqlConnection(connstring);
+    private readonly DatabaseService _dbService;
 
     public LoginPage(Action<System.Windows.Controls.Page> navigate)
     {
         InitializeComponent();
         _navigate = navigate;
-
+        _dbService = new DatabaseService();
     }
 
     private void RoundedButton_OnClick(object sender, RoutedEventArgs e)
     {
-        conn.Open();
-        NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM user_table WHERE email = @email AND password = @password", conn);
-        try
+        if (_dbService.ValidateUser(EmailTxtBox.Text, PasswordTxtBox.Text))
         {
-            cmd.Parameters.AddWithValue("email", EmailTxtBox.Text);
-            cmd.Parameters.AddWithValue("password", PasswordTxtBox.Text);
-            if (cmd.ExecuteScalar() != null)
-            {
-                Home Home = new Home();
-                Home.Show();
-                conn.Close();
-            }
-            else
-            {
-                MessageBox.Show("Email or password is incorrect");
-            }
-
-            
+            Home home = new();
+            home.Show();
         }
-        catch (Exception ex)
+        else
         {
-            MessageBox.Show(ex.Message);
-            conn.Close();
+            MessageBox.Show("Email or password is incorrect");
+
         }
     }
-
     private void TestClick(object sender, RoutedEventArgs e)
     {
         _navigate(new RegisterPage(_navigate));
