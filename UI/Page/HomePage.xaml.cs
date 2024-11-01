@@ -1,21 +1,25 @@
 ﻿using ChicTrash.UI.Component;
 using System.Windows;
 using System.Windows.Controls;
-using System;
+using ChicTrash.UI.Page;
+using ChicTrash.UI.Windows;
 
 namespace ChicTrash.UI.Page;
 
 public partial class HomePage : System.Windows.Controls.Page
 {
-    public readonly DatabaseService _dbService;
     public HomePage()
     {
         InitializeComponent();
-        _dbService = new DatabaseService();   
     }
 
-    private void ProfileBalanceCard_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    private void ProfileBalanceCard_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
+        var homeWindow = Application.Current.Windows.OfType<Home>().FirstOrDefault();
+        if (homeWindow != null)
+        {
+            homeWindow.OpenLoginPage();
+        }
 
     }
 }
