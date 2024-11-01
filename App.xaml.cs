@@ -9,6 +9,7 @@ namespace ChicTrash
     /// </summary>
     public partial class App : Application
     {
+
     }
 
 }

@@ -10,7 +10,7 @@
         
         <ScrollViewer>
         <StackPanel>
-        <component:ProfileBalanceCard Width="878" Height="200">
+            <component:ProfileBalanceCard x:Name="profileBalanceCard" Width="878" Height="200" Loaded="ProfileBalanceCard_Loaded">
             <component:ProfileBalanceCard.RenderTransform>
                 <TranslateTransform X="-150"></TranslateTransform>
             </component:ProfileBalanceCard.RenderTransform>

@@ -18,9 +18,9 @@
             <!-- Text Section (left) -->
             <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <!-- Title text -->
-                <TextBlock Text="Welcome User" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="Bold" Foreground="Black" FontSize="18"/>
+                <TextBlock x:Name="userName" Text="Welcome User" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="Bold" Foreground="Black" FontSize="18"/>
                 <!-- Balance text -->
-                <TextBlock Text="Rp 999999999" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Foreground="Black" FontSize="14" Margin="0,5,0,0"/>
+                <TextBlock x:Name="userBalance" Text="Rp 999999999" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Foreground="Black" FontSize="14" Margin="0,5,0,0"/>
             </StackPanel>
 
             <!-- Icon Section (right) -->
@@ -31,7 +31,7 @@
                 <!-- Icon Image (profile picture) -->
                 <Border Background="Aqua" Width="80" Height="80" CornerRadius="40" BorderBrush="Black" BorderThickness="2">
                     
-                    <Image Source="" Stretch="Uniform"/>
+                    <Image Stretch="Uniform"/>
                     
                 </Border>
             </StackPanel>

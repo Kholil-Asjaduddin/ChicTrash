@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "K:\\ChicTrash_app\\ChicTrash.csproj": {}
+    "D:\\UGM\\Project\\Semester 5\\Junior Project\\ChicTrash\\ChicTrash.csproj": {}
   },
   "projects": {
-    "K:\\ChicTrash_app\\ChicTrash.csproj": {
+    "D:\\UGM\\Project\\Semester 5\\Junior Project\\ChicTrash\\ChicTrash.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "K:\\ChicTrash_app\\ChicTrash.csproj",
+        "projectUniqueName": "D:\\UGM\\Project\\Semester 5\\Junior Project\\ChicTrash\\ChicTrash.csproj",
         "projectName": "ChicTrash",
-        "projectPath": "K:\\ChicTrash_app\\ChicTrash.csproj",
-        "packagesPath": "C:\\Users\\M S I\\.nuget\\packages\\",
-        "outputPath": "K:\\ChicTrash_app\\obj\\",
+        "projectPath": "D:\\UGM\\Project\\Semester 5\\Junior Project\\ChicTrash\\ChicTrash.csproj",
+        "packagesPath": "C:\\Users\\kasja\\.nuget\\packages\\",
+        "outputPath": "D:\\UGM\\Project\\Semester 5\\Junior Project\\ChicTrash\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\M S I\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kasja\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -39,17 +39,16 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "Microsoft.Extensions.Logging.Abstractions": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -78,7 +77,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
