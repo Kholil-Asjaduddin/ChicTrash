@@ -16,7 +16,8 @@ namespace ChicTrash
         private string _userPhone;
         private string _userAdress;
         private double _userMoney;
-        
+        private string? _sellerId;
+        private string? _customerId;
 
         public string UserName
         {
@@ -55,39 +56,21 @@ namespace ChicTrash
             get { return _userId; }
             set { _userId = value; }
         }
-
-        //Method
-        public Boolean Login(string userName, string userPassword)
+        public string? SellerId
         {
-            if (userName == "hoho" & userPassword == "000")
-            {
-                _userId = 1;
-                return true;
-            }
-            else if (userName == "kholil" & userPassword == "111")
-            {
-                _userId = 2;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            get { return _sellerId; }
+            set { _sellerId = value; }
         }
 
+        public string? CustomerId
+        {
+            get { return _customerId; }
+            set { _customerId = value; }
+        }
         public double GetMoney()
         {
             return _userMoney;
         }
 
-        public void Register()
-        {
-            _userName = "Dapa";
-            _userId = 10;
-            _userAdress = "Pogung";
-            _userEmail = "Dapa123@mail.com";
-            _userPassword = "password";
-            _userPhone = "08222222222222";
-        }
     }
 }

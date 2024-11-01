@@ -21,7 +21,7 @@ namespace ChicTrash
         public MainWindow()
         {
             InitializeComponent();
-            ContentFrame.Navigate(new LoginPage(NavigateToPage));
+            //ContentFrame.Navigate(new LoginPage(NavigateToPage));
         }
         
         private void NavigateToPage(Page? page)
