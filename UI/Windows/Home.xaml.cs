@@ -12,7 +12,7 @@ public partial class Home : Window
     {
         InitializeComponent();
         _dbService = new DatabaseService();
-        ContentFrame.Navigate(new ItemPage());
+        OpenLoginPage();
 
         // Set the window to fit the screen size and allow resizing
         this.WindowStartupLocation = WindowStartupLocation.CenterScreen;

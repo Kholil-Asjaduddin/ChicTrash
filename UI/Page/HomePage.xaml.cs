@@ -17,6 +17,8 @@ public partial class HomePage : System.Windows.Controls.Page
     {
         InitializeComponent();
         homeWindow = Application.Current.Windows.OfType<Home>().FirstOrDefault();
+        FetchUserInfo();
+        UpdateProfileBalanceCard();
         LoadItems();
     }
 
@@ -51,7 +53,10 @@ public partial class HomePage : System.Windows.Controls.Page
     {
         if (homeWindow != null)
         {
-            homeWindow.OpenLoginPage();
+            if (_customer == null && _seller == null)
+            {
+                homeWindow.OpenLoginPage();
+            }
         }
 
     }
