@@ -10,41 +10,28 @@ namespace ChicTrash.UI.Page;
 public partial class LoginPage : System.Windows.Controls.Page
 {
     private readonly Action<System.Windows.Controls.Page> _navigate;
-    public static string connstring = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING");
-    public NpgsqlConnection conn = new NpgsqlConnection(connstring);
-
-    public LoginPage(Action<System.Windows.Controls.Page> navigate)
+    private readonly DatabaseService _dbService;
+    public LoginPage(DatabaseService dbService, Action<System.Windows.Controls.Page> navigate)
     {
         InitializeComponent();
+        _dbService = dbService;
         _navigate = navigate;
-
     }
 
     private void RoundedButton_OnClick(object sender, RoutedEventArgs e)
     {
-        conn.Open();
-        NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM user_table WHERE email = @email AND password = @password", conn);
-        try
+        if (_dbService.ValidateUser(EmailTxtBox.Text, PasswordTxtBox.Text))
         {
-            cmd.Parameters.AddWithValue("email", EmailTxtBox.Text);
-            cmd.Parameters.AddWithValue("password", PasswordTxtBox.Text);
-            if (cmd.ExecuteScalar() != null)
+            var homeWindow = Application.Current.Windows.OfType<Home>().FirstOrDefault();
+            if (homeWindow != null)
             {
-                Home Home = new Home();
-                Home.Show();
-                conn.Close();
+                homeWindow.SetUserRole(_dbService.GetUserIdByEmail(EmailTxtBox.Text));
+                _navigate(new HomePage());
             }
-            else
-            {
-                MessageBox.Show("Email or password is incorrect");
-            }
-
-            
         }
-        catch (Exception ex)
+        else
         {
-            MessageBox.Show(ex.Message);
-            conn.Close();
+            MessageBox.Show("Email or password is incorrect");
         }
     }
 
