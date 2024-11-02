@@ -30,25 +30,25 @@
         <!-- Card Layout -->
         <WrapPanel x:Name="wrapPanel" Grid.Row="2" ItemWidth="220" Width="880" Height="500">
             <WrapPanel.RenderTransform>
-                <TranslateTransform X="-135" ></TranslateTransform>
+                <TranslateTransform X="-135"></TranslateTransform>
             </WrapPanel.RenderTransform>
         </WrapPanel>
 
         <TextBlock Grid.Row="2" FontSize="24" FontWeight="Bold" Margin="10" >
             <TextBlock.RenderTransform>
-                <TranslateTransform X="265" Y="-290"></TranslateTransform>
+                <TranslateTransform X="265" Y="-230"></TranslateTransform>
             </TextBlock.RenderTransform>
             Article
         </TextBlock>
         <Separator Grid.Row="2" Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
             <Separator.RenderTransform>
-                <TranslateTransform X="-140" Y="-300"></TranslateTransform>
+                    <TranslateTransform X="-140" Y="-240"></TranslateTransform>
             </Separator.RenderTransform>
         </Separator>
 
-            <WrapPanel Grid.Row="2" ItemWidth="900" Width="960" ItemHeight="300" Height="500">
+            <WrapPanel Grid.Row="2" ItemWidth="860" Width="880" ItemHeight="300" Height="500">
                 <WrapPanel.RenderTransform>
-                    <TranslateTransform X="-90" ></TranslateTransform>
+                    <TranslateTransform X="-123" Y="50"></TranslateTransform>
                 </WrapPanel.RenderTransform>
                 <!-- Example cards with Margin for spacing -->
                 <component:ItemCard Height="400" Margin="-10,-475,0,0">

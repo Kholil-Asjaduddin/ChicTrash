@@ -75,14 +75,9 @@
                 <component:ItemCard Margin="10" />
                 <component:ItemCard Margin="10" />
                 <component:ItemCard Margin="10" />
-               
+
                 <!-- Add more cards as needed -->
             </WrapPanel>
         </ScrollViewer>
-    <component:Carousel Margin="0,0,378,0">
-        <component:Carousel.RenderTransform>
-            <TranslateTransform Y="100"></TranslateTransform>
-        </component:Carousel.RenderTransform>
-    </component:Carousel>
     </Grid>
 </Page>
