@@ -58,7 +58,8 @@ public partial class Home : Window
                 UserPassword = user.UserPassword,
                 UserPhone = user.UserPhone,
                 UserAdress = user.UserAdress,
-                UserMoney = user.UserMoney
+                UserMoney = user.UserMoney,
+                CustomerId = user.CustomerId.ToString()
             };
         }
         else
