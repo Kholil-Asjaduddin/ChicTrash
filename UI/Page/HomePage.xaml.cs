@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using ChicTrash.UI.Page;
 using ChicTrash.UI.Windows;
+using System.Windows.Media.Imaging;
+using Sprache;
 
 namespace ChicTrash.UI.Page;
 
@@ -15,6 +17,7 @@ public partial class HomePage : System.Windows.Controls.Page
     {
         InitializeComponent();
         homeWindow = Application.Current.Windows.OfType<Home>().FirstOrDefault();
+        LoadItems();
     }
 
     private void FetchUserInfo()
@@ -57,5 +60,38 @@ public partial class HomePage : System.Windows.Controls.Page
     {
         FetchUserInfo();
         UpdateProfileBalanceCard();
+    }
+
+    private void LoadItems()
+    {
+        if (homeWindow != null)
+        {
+            var items = homeWindow._dbService.GetItems();
+
+            // Batasi jumlah item yang ditampilkan menjadi 4
+            int maxItemsToShow = 4;
+            int itemsCount = Math.Min(items.Count, maxItemsToShow);
+
+            for (int i = 0; i < itemsCount; i++)
+            {
+                var item = items[i];
+                var itemCard = new ItemCard();
+                itemCard.productName.Text = item.ItemName;
+                itemCard.productPrice.Text = "Rp " + item.Price.ToString("N0");
+
+                if (!string.IsNullOrEmpty(item.Image))
+                {
+                    itemCard.productImage.Source = new BitmapImage(new Uri(item.Image, UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    itemCard.productImage.Source = new BitmapImage(new Uri("path/to/default/image.png", UriKind.RelativeOrAbsolute));
+                }
+
+                // Set margin dynamically
+                itemCard.Margin = new Thickness(10);
+                wrapPanel.Children.Add(itemCard);
+            }
+        }
     }
 }
