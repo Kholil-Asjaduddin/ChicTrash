@@ -7,66 +7,47 @@
       xmlns:component="clr-namespace:ChicTrash.UI.Component"
       mc:Ignorable="d"
       Title="HomePage" Height="1080" Width="1720">
-        
-        <ScrollViewer>
+    <ScrollViewer>
         <StackPanel>
             <component:ProfileBalanceCard x:Name="profileBalanceCard" Width="878" Height="200" MouseLeftButtonUp="ProfileBalanceCard_MouseLeftButtonUp">
-            <component:ProfileBalanceCard.RenderTransform>
-                <TranslateTransform X="-150"></TranslateTransform>
-            </component:ProfileBalanceCard.RenderTransform>
-        </component:ProfileBalanceCard>
-        
-        <TextBlock Grid.Row="1" Text="What’s For Sale" FontSize="24" FontWeight="Bold" Margin="10" >
-            <TextBlock.RenderTransform>
-                <TranslateTransform X="275" Y="15"></TranslateTransform>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <Separator Grid.Row="2" Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
-            <Separator.RenderTransform>
-                <TranslateTransform X="-135" ></TranslateTransform>
-            </Separator.RenderTransform>
-        </Separator>
-        
-        <!-- Card Layout -->
-        
-            
-            <WrapPanel  Grid.Row="2" ItemWidth="150" Width="960" Height="500">
-                <WrapPanel.RenderTransform>
-                    <TranslateTransform X="-110" ></TranslateTransform>
-                </WrapPanel.RenderTransform>
-                <!-- Example cards with Margin for spacing -->
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <!-- Add more cards as needed -->
-            </WrapPanel>
-
-        <TextBlock Grid.Row="2" FontSize="24" FontWeight="Bold" Margin="10" >
-            <TextBlock.RenderTransform>
-                <TranslateTransform X="265" Y="-290"></TranslateTransform>
-            </TextBlock.RenderTransform>
-            Article
-        </TextBlock>
-        <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
-            <Separator.RenderTransform>
-                <TranslateTransform X="-140" Y="-300"></TranslateTransform>
-            </Separator.RenderTransform>
+                <component:ProfileBalanceCard.RenderTransform>
+                    <TranslateTransform X="-150"></TranslateTransform>
+                </component:ProfileBalanceCard.RenderTransform>
+            </component:ProfileBalanceCard>
+            <TextBlock Grid.Row="1" Text="What’s For Sale" FontSize="24" FontWeight="Bold" Margin="10" >
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="275" Y="15"></TranslateTransform>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Separator Grid.Row="2" Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
+                <Separator.RenderTransform>
+                    <TranslateTransform X="-135" ></TranslateTransform>
+                </Separator.RenderTransform>
             </Separator>
-        
-            <WrapPanel Grid.Row="2" ItemWidth="900" Width="960" ItemHeight="300" Height="500">
+            <!-- Card Layout -->
+            <WrapPanel x:Name="wrapPanel" Grid.Row="2" ItemWidth="220" Width="880" Height="500">
                 <WrapPanel.RenderTransform>
-                    <TranslateTransform X="-90" ></TranslateTransform>
+                    <TranslateTransform X="-135"></TranslateTransform>
                 </WrapPanel.RenderTransform>
-                <!-- Example cards with Margin for spacing -->
-                <component:ItemCard Height="400" Margin="-10,-475,0,0">
-                  
-                </component:ItemCard>
-               
-                <!-- Add more cards as needed -->
             </WrapPanel>
-    </StackPanel>
+            <TextBlock Grid.Row="2" FontSize="24" FontWeight="Bold" Margin="10" >
+                <TextBlock.RenderTransform>
+                    <TranslateTransform X="265" Y="-230"></TranslateTransform>
+                </TextBlock.RenderTransform>
+                Article
+            </TextBlock>
+            <Separator Grid.Row="2" Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
+                <Separator.RenderTransform>
+                    <TranslateTransform X="-140" Y="-240"></TranslateTransform>
+                </Separator.RenderTransform>
+            </Separator>
+            <WrapPanel Grid.Row="2" ItemWidth="860" Width="880" ItemHeight="300" Height="500">
+                <WrapPanel.RenderTransform>
+                    <TranslateTransform X="-123" Y="50"></TranslateTransform>
+                </WrapPanel.RenderTransform>
+                <component:ItemCard Height="400" Margin="-10,-475,0,0">
+                </component:ItemCard>
+            </WrapPanel>
+        </StackPanel>
     </ScrollViewer>
 </Page>

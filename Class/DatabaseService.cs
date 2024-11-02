@@ -99,5 +99,39 @@ namespace ChicTrash
 
             return userId;
         }
+        public List<Item> GetItems()
+        {
+            List<Item> items = new List<Item>();
+
+            try
+            {
+                using var conn = GetConnection();
+                conn.Open();
+                using var cmd = new NpgsqlCommand("SELECT * FROM item", conn);
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    items.Add(new Item
+                    {
+                        ItemId = reader.GetInt32(reader.GetOrdinal("item_id")),
+                        SellerId = reader.GetGuid(reader.GetOrdinal("seller_id")),
+                        CustomerId = reader.IsDBNull(reader.GetOrdinal("customer_id")) ? (Guid?)null : reader.GetGuid(reader.GetOrdinal("customer_id")),
+                        ItemName = reader.GetString(reader.GetOrdinal("item_name")),
+                        Category = reader.GetString(reader.GetOrdinal("category")),
+                        Description = reader.GetString(reader.GetOrdinal("description")),
+                        Price = (double)reader.GetDecimal(reader.GetOrdinal("price")),
+                        Quantity = reader.GetInt32(reader.GetOrdinal("quantity")),
+                        Image = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString(reader.GetOrdinal("image")) // Check if image is fetched properly
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error saat mencoba mendapatkan daftar item: " + ex.Message);
+            }
+
+            return items;
+        }
+
     }
 }

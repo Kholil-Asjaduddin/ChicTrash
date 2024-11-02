@@ -9,80 +9,37 @@
       Title="CommercePage" Height="1080" Width="1720">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <!-- For RoundedTextBox -->
+            <RowDefinition Height="*"/>
+            <!-- For ScrollViewer -->
         </Grid.RowDefinitions>
-        <component:RoundedTextBox Width="878" Height="40">
+        <component:RoundedTextBox Width="878" Height="40" Grid.Row="0" Margin="0,10,0,10">
             <component:RoundedTextBox.RenderTransform>
-                <TranslateTransform X="-130" Y="-100"></TranslateTransform>
+                <TranslateTransform X="0" Y="0"></TranslateTransform>
+                <!-- Adjusted the translation -->
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
-        <TextBlock Grid.Row="1" Text="Waste" FontSize="24" FontWeight="Bold" Margin="10" >
-            <TextBlock.RenderTransform>
-                <TranslateTransform X="275" Y="100"></TranslateTransform>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <Separator Grid.Row="2" Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
-            <Separator.RenderTransform>
-                <TranslateTransform X="-135" Y="-255"></TranslateTransform>
-            </Separator.RenderTransform>
-        </Separator>
-        
         <!-- Card Layout -->
-        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Height="700">
-            <ScrollViewer.RenderTransform>
-                <TranslateTransform Y="-200"></TranslateTransform>
-            </ScrollViewer.RenderTransform>
-            <WrapPanel ItemWidth="150" Width="960" Height="500">
-                <WrapPanel.RenderTransform>
-                    <TranslateTransform X="-110" ></TranslateTransform>
-                </WrapPanel.RenderTransform>
-                <!-- Example cards with Margin for spacing -->
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <!-- Add more cards as needed -->
-            </WrapPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="Waste" FontSize="24" FontWeight="Bold" Margin="420,10,10,10" HorizontalAlignment="Left"/>
+                <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray" HorizontalAlignment="Center"/>
+
+                <WrapPanel x:Name="wrapPanelWaste" ItemWidth="220" Width="880" Margin="0,0,0,20" HorizontalAlignment="Center">
+                    <!-- ItemCards will be added here dynamically -->
+                </WrapPanel>
+
+                <TextBlock Text="Recycled Items" FontSize="24" FontWeight="Bold" Margin="420,10,10,10" HorizontalAlignment="Left"/>
+                <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray" HorizontalAlignment="Center"/>
+
+                <WrapPanel x:Name="wrapPanelRecycled" ItemWidth="220" Width="880" HorizontalAlignment="Center">
+                    <!-- ItemCards will be added here dynamically -->
+                </WrapPanel>
+
+                <!-- Adding extra space at the bottom -->
+                <TextBlock Height="200"/>
+            </StackPanel>
         </ScrollViewer>
-        <TextBlock FontSize="24" FontWeight="Bold" Margin="10" >
-            <TextBlock.RenderTransform>
-                <TranslateTransform X="275" Y="625"></TranslateTransform>
-            </TextBlock.RenderTransform>
-            Recycled Items
-        </TextBlock>
-        <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray">
-            <Separator.RenderTransform>
-                <TranslateTransform X="-135" Y="550"></TranslateTransform>
-            </Separator.RenderTransform>
-            </Separator>
-        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" Height="700">
-            <ScrollViewer.RenderTransform>
-                <TranslateTransform Y="75"></TranslateTransform>
-            </ScrollViewer.RenderTransform>
-            <WrapPanel ItemWidth="150" Width="960" Height="500">
-                <WrapPanel.RenderTransform>
-                    <TranslateTransform X="-110" ></TranslateTransform>
-                </WrapPanel.RenderTransform>
-                <!-- Example cards with Margin for spacing -->
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
-               
-                <!-- Add more cards as needed -->
-            </WrapPanel>
-        </ScrollViewer>
-    <component:Carousel Margin="0,0,378,0">
-        <component:Carousel.RenderTransform>
-            <TranslateTransform Y="100"></TranslateTransform>
-        </component:Carousel.RenderTransform>
-    </component:Carousel>
     </Grid>
 </Page>
