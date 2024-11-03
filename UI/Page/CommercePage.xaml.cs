@@ -60,6 +60,11 @@ public partial class CommercePage : System.Windows.Controls.Page
                     itemCard.productImage.Source = new BitmapImage(new Uri("path/to/default/image.png", UriKind.RelativeOrAbsolute));
                 }
 
+                itemCard.MouseLeftButtonUp += (sender, e) =>
+                {
+                    homeWindow.ContentFrame.Navigate(new ItemPage(item));
+                };
+
                 wrapPanel.Children.Add(itemCard);
             }
         }

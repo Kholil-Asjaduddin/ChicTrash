@@ -93,6 +93,12 @@ public partial class HomePage : System.Windows.Controls.Page
                     itemCard.productImage.Source = new BitmapImage(new Uri("path/to/default/image.png", UriKind.RelativeOrAbsolute));
                 }
 
+                // Add MouseLeftButtonUp event handler
+                itemCard.MouseLeftButtonUp += (sender, e) =>
+                {
+                    homeWindow.ContentFrame.Navigate(new ItemPage(item));
+                };
+
                 // Set margin dynamically
                 itemCard.Margin = new Thickness(10);
                 wrapPanel.Children.Add(itemCard);
