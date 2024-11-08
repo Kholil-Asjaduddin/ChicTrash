@@ -1,11 +1,14 @@
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using ChicTrash.UI.Windows;
 
 namespace ChicTrash.UI.Page;
 
 public partial class ItemPage : System.Windows.Controls.Page
 {
     private Item _item;
+    private readonly Action<System.Windows.Controls.Page> _navigate;
     public ItemPage(Item item)
     {
         InitializeComponent();
@@ -15,7 +18,7 @@ public partial class ItemPage : System.Windows.Controls.Page
 
     private void RoundedButton_OnClick(object sender, System.Windows.RoutedEventArgs e)
     {
-
+        Application.Current.Windows.OfType<Home>().FirstOrDefault()?.ContentFrame.Navigate(new CartList());
     }
 
     private void RoundedButton_Loaded(object sender, System.Windows.RoutedEventArgs e)

@@ -44,13 +44,15 @@ namespace ChicTrash
             var cmd = new NpgsqlCommand("SELECT * FROM user_table WHERE email = @Email AND password = @Password", conn);
             cmd.Parameters.AddWithValue("Email", email);
             cmd.Parameters.AddWithValue("Password", password);
+            
+            
 
             return cmd.ExecuteScalar() != null;
         }
 
         public User GetUserById(int userId)
         {
-            User user = null;
+            User? user  = null;
 
             try
             {
@@ -77,9 +79,9 @@ namespace ChicTrash
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error saat mencoba mendapatkan user berdasarkan ID: " + ex.Message);
+                MessageBox.Show("Error saat mencoba mendapatkan user berdasarkan ID: " + ex.Message);
             }
-
+            
             return user;
         }
 
@@ -97,7 +99,7 @@ namespace ChicTrash
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error saat mencoba mendapatkan user ID berdasarkan email: " + ex.Message);
+                MessageBox.Show("Error saat mencoba mendapatkan user ID berdasarkan email: " + ex.Message);
             }
 
             return userId;
@@ -131,22 +133,54 @@ namespace ChicTrash
             catch (Exception ex)
             {
                 conn.Close();
-                Console.WriteLine("Error saat mencoba mendapatkan daftar item: " + ex.Message);
+                MessageBox.Show("Error saat mencoba mendapatkan daftar item: " + ex.Message);
             }
 
             return items;
         }
 
-        public void inputIntoCart(int userId, Item item, int Quantity)
+        public List<Cart> getUserCart(int userId)
+        {
+            using var conn = GetConnection();
+            List<Cart> cartItem = new List<Cart>();
+            try
+            {
+                conn.Open();
+                using var cmd = new NpgsqlCommand("SELECT cart.item_id, cart.quantity, item_name, category, description, price, image FROM cart JOIN item ON item.item_id = cart.item_id AND user_id = @user_id;", conn);
+                cmd.Parameters.AddWithValue("userId", userId);
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    cartItem.Add(new Cart{
+                            itemId =  reader.GetInt32(reader.GetOrdinal("item_id")),
+                            itemPrice = reader.GetDouble(reader.GetOrdinal("price")),
+                            itemImage = reader.GetString(reader.GetOrdinal("image")),
+                            itemQuantity = reader.GetInt32(reader.GetOrdinal("quantity")),
+                            itemName = reader.GetString(reader.GetOrdinal("item_name")),
+                            itemDescription = reader.GetString(reader.GetOrdinal("description")),
+                            itemCategory = reader.GetString(reader.GetOrdinal("category"))
+                        });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            MessageBox.Show(cartItem[2].itemName);
+            return cartItem;
+        }
+
+        public void inputIntoCart(int userId, Item item, int quantity)
         {
             using var conn = GetConnection();
             try
             {
                 conn.Open();
-                using var cmd = new NpgsqlCommand("INSERT INTO cart (cart_id, user_id, item_id, quantity) VALUES (@UserId, @ItemId, @Quantity)", conn);
+                using var cmd = new NpgsqlCommand("INSERT INTO cart (user_id, item_id, quantity) VALUES (@UserId, @ItemId, @Quantity)", conn);
                 cmd.Parameters.AddWithValue("@UserId", userId );
                 cmd.Parameters.AddWithValue("@ItemId", item.ItemId);
-                cmd.Parameters.AddWithValue("@Quantity", Quantity);
+                cmd.Parameters.AddWithValue("@Quantity", quantity);
 
                 cmd.ExecuteNonQuery();
             }

@@ -37,6 +37,7 @@ public partial class RegisterPage : System.Windows.Controls.Page
         if (_dbService.registerUser(newAccount, RadioButton_Buyer.IsChecked.Value, RadioButton_Seller.IsChecked.Value))
         {
             _navigate(new HomePage());
+            Application.Current.Windows.OfType<Home>().FirstOrDefault()?.setUser(newAccount);
         }
          
         
