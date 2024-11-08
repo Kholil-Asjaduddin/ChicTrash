@@ -7,28 +7,29 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Border CornerRadius="15" BorderBrush="LightGray" BorderThickness="2" Background="White" Padding="10" Cursor="Hand">
-        <Grid>
+        <Grid Margin="0,0,0,-40">
             <!-- Define rows to split between icon and text -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />  <!-- Icon Section -->
-                <RowDefinition Height="Auto" /> <!-- Text Section -->
+                <RowDefinition Height="*" />
+                <!-- Icon Section -->
+                <RowDefinition Height="Auto" />
+                <!-- Text Section -->
             </Grid.RowDefinitions>
 
             <!-- Icon Section (top) -->
             <Border Background="#D5D5D5" CornerRadius="15,15,0,0" Grid.Row="0" Margin="-11,-13,-11,40">
-                <Image Source="../Images/icon-svgrepo-com.png" 
-                       Width="50" Height="50" 
-                       Stretch="Uniform"/>
+                <Image x:Name="productImage" Source="../Images/icon-svgrepo-com.png" 
+                       Stretch="Uniform" Margin="22,10,19,10"/>
             </Border>
 
             <!-- Text Section (bottom) -->
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
-                <TextBlock Text="Lorem" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" >
+                <TextBlock x:Name="productName" Text="Name" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" >
                     <TextBlock.RenderTransform>
                         <TranslateTransform Y="-40"></TranslateTransform>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-                <TextBlock Text="Ipsum" FontSize="16" HorizontalAlignment="Center" >
+                <TextBlock x:Name="productPrice" Text="Rp. " FontSize="16" HorizontalAlignment="Center" >
                     <TextBlock.RenderTransform>
                         <TranslateTransform Y="-40"></TranslateTransform>
                     </TextBlock.RenderTransform>

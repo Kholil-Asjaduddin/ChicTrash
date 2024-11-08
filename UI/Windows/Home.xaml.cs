@@ -12,7 +12,13 @@ public partial class Home : Window
     {
         InitializeComponent();
         _dbService = new DatabaseService();
-        ContentFrame.Navigate(new ItemPage());
+        OpenLoginPage();
+
+        // Set the window to fit the screen size and allow resizing
+        this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        this.Width = SystemParameters.WorkArea.Width;
+        this.Height = SystemParameters.WorkArea.Height;
+        this.ResizeMode = ResizeMode.CanResize;
     }
 
    
@@ -58,7 +64,8 @@ public partial class Home : Window
                 UserPassword = user.UserPassword,
                 UserPhone = user.UserPhone,
                 UserAdress = user.UserAdress,
-                UserMoney = user.UserMoney
+                UserMoney = user.UserMoney,
+                CustomerId = user.CustomerId.ToString()
             };
         }
         else
