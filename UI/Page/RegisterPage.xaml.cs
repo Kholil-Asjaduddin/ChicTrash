@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 using ChicTrash.UI.Windows;
@@ -9,36 +11,35 @@ namespace ChicTrash.UI.Page;
 public partial class RegisterPage : System.Windows.Controls.Page
 {
     private readonly Action<System.Windows.Controls.Page> _navigate;
-    public static string connstring = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING");
-    public NpgsqlConnection conn = new NpgsqlConnection(connstring);
     
-    public RegisterPage(Action<System.Windows.Controls.Page> navigate)
+    
+    private static DatabaseService _dbService;
+    
+    public RegisterPage(Action<System.Windows.Controls.Page> navigate, DatabaseService databaseService)
     {
         InitializeComponent();
+        _dbService = databaseService;
         _navigate = navigate;
 
     }
+
     private void RoundedButton_OnClick(object sender, RoutedEventArgs e)
     {
-        conn.Open();
-        try
+        User newAccount = new User();
+        newAccount.UserName = UsernameTxtBox.Text;
+        newAccount.UserEmail = EmailTxtBox.Text;
+        newAccount.UserPassword = PasswordTxtBox.Text;
+        newAccount.UserPhone = PhoneTxtBox.Text;
+        newAccount.UserAdress = AddressTxtBox.Text;
+        newAccount.UserMoney = 0;
+        newAccount.SellerId = null;
+        newAccount.CustomerId = null;
+        if (_dbService.registerUser(newAccount, RadioButton_Buyer.IsChecked.Value, RadioButton_Seller.IsChecked.Value))
         {
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO user_table (user_name, email, password, phone, address, money) VALUES (@user_name , @email, @password, '','',0)", conn);
-            command.Parameters.AddWithValue("user_name", UsernameTxtBox.Text);
-            command.Parameters.AddWithValue("email", EmailTxtBox.Text);
-            command.Parameters.AddWithValue("password", PasswordTxtBox.Text);
-            command.ExecuteNonQuery();
-            MessageBox.Show("User created successfully");
-            conn.Close();
-            Home page = new Home();
-            page.Show();
-            
+            _navigate(new HomePage());
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message);
-            conn.Close();
-        }
+         
+        
     }
 
     private void TestClick(object sender, RoutedEventArgs e)

@@ -37,6 +37,6 @@ public partial class LoginPage : System.Windows.Controls.Page
 
     private void TestClick(object sender, RoutedEventArgs e)
     {
-        _navigate(new RegisterPage(_navigate));
+        _navigate(new RegisterPage(_navigate, _dbService));
     }
 }

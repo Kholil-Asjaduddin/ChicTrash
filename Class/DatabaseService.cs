@@ -1,5 +1,8 @@
 ﻿using System;
 using Npgsql;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows;
 using DotNetEnv;
 
 namespace ChicTrash
@@ -15,7 +18,7 @@ namespace ChicTrash
             _connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION");
         }
 
-        private NpgsqlConnection GetConnection()
+        public NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection(_connectionString);
         }
@@ -102,10 +105,10 @@ namespace ChicTrash
         public List<Item> GetItems()
         {
             List<Item> items = new List<Item>();
+            using var conn = GetConnection();
 
             try
             {
-                using var conn = GetConnection();
                 conn.Open();
                 using var cmd = new NpgsqlCommand("SELECT * FROM item", conn);
                 using var reader = cmd.ExecuteReader();
@@ -127,11 +130,108 @@ namespace ChicTrash
             }
             catch (Exception ex)
             {
+                conn.Close();
                 Console.WriteLine("Error saat mencoba mendapatkan daftar item: " + ex.Message);
             }
 
             return items;
         }
 
+        public void inputIntoCart(int userId, Item item, int Quantity)
+        {
+            using var conn = GetConnection();
+            try
+            {
+                conn.Open();
+                using var cmd = new NpgsqlCommand("INSERT INTO cart (cart_id, user_id, item_id, quantity) VALUES (@UserId, @ItemId, @Quantity)", conn);
+                cmd.Parameters.AddWithValue("@UserId", userId );
+                cmd.Parameters.AddWithValue("@ItemId", item.ItemId);
+                cmd.Parameters.AddWithValue("@Quantity", Quantity);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            conn.Close();
+        }
+
+        public bool registerUser(User user, bool isBuyer = false, bool isSeller = false)
+        {
+            int user_id;
+            using var conn = GetConnection();
+            conn.Open();
+        try{
+            if (isBuyer == true)
+            {
+                NpgsqlCommand command =
+                    new NpgsqlCommand(
+                        "INSERT INTO user_table (user_name, email, password, phone, address, money) VALUES (@user_name , @email, @password, @phone,@address,0)",
+                        conn);
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                command.Parameters.AddWithValue("email", user.UserEmail);
+                command.Parameters.AddWithValue("password", user.UserPassword);
+                command.Parameters.AddWithValue("phone", user.UserPhone.ToString());
+                command.Parameters.AddWithValue("address", user.UserAdress);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+                command.CommandText = "SELECT user_id FROM user_table WHERE user_name=@user_name";
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                user_id = (int)command.ExecuteScalar();
+                command.CommandText = "INSERT INTO customer (customer_id, user_id) VALUES (@customer_id, @user_id)";
+                command.Parameters.AddWithValue("customer_id", Guid.NewGuid());
+                command.Parameters.AddWithValue("user_id", user_id);
+                command.ExecuteNonQuery();
+                command.CommandText = "UPDATE user_table SET customer_id=@customer_id WHERE user_id=@user_id ";
+                command.ExecuteNonQuery();
+                
+                MessageBox.Show("User created successfully");
+                return true;
+            }
+            else if (isSeller == true)
+            {
+                NpgsqlCommand command =
+                    new NpgsqlCommand(
+                        "INSERT INTO user_table ( user_name, email, password, phone, address, money) VALUES (@user_name , @email, @password, @phone,@address,0);",
+                        conn);
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                command.Parameters.AddWithValue("email", user.UserEmail);
+                command.Parameters.AddWithValue("password", user.UserPassword);
+                command.Parameters.AddWithValue("phone", user.UserPhone.ToString());
+                command.Parameters.AddWithValue("address", user.UserAdress);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+                command.CommandText = "SELECT user_id FROM user_table WHERE user_name=@user_name";
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                user_id = (int)command.ExecuteScalar();
+                command.CommandText = "INSERT INTO seller (seller_id, user_id) VALUES (@seller_id, @user_id)";
+                command.Parameters.AddWithValue("seller_id", Guid.NewGuid());
+                command.Parameters.AddWithValue("user_id", user_id);
+                command.ExecuteNonQuery();
+                command.CommandText = "UPDATE user_table SET seller_id=@seller_id WHERE user_id=@user_id ";
+                command.ExecuteNonQuery();
+                
+                MessageBox.Show("User created successfully");
+                conn.Close();
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Please select an option");
+                return false;
+            }
+            
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+            conn.Close();
+        }
+            return false;
+        }
     }
+    
+    
 }

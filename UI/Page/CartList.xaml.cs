@@ -30,5 +30,11 @@ namespace ChicTrash.UI.Page
               
             }
         }
+
+        private void ItemPanel_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            
+            
+        }
     }
 }
