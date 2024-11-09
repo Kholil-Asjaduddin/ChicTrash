@@ -70,7 +70,7 @@ public partial class Home : Window
                 UserPassword = user.UserPassword,
                 UserPhone = user.UserPhone,
                 UserAdress = user.UserAdress,
-                UserMoney = 0,
+                UserMoney = user.UserMoney,
                 
             };
             MessageBox.Show(CurrentUser.ToString());

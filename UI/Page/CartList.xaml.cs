@@ -22,6 +22,7 @@ namespace ChicTrash.UI.Page
     {
         public User _user;
         public DatabaseService _dbService;
+        public double totalPrice;
 
         public CartList()
         {
@@ -41,9 +42,7 @@ namespace ChicTrash.UI.Page
 
         private void ItemPanel_OnLoaded(object sender, RoutedEventArgs e)
         {
-            
             var itemCart = _dbService.getUserCart(_user.UserUserId);
-            MessageBox.Show(itemCart.Count().ToString());
             foreach (var item in itemCart)
             {
                 var card = new CartItemCard
@@ -51,11 +50,20 @@ namespace ChicTrash.UI.Page
                     Margin = new Thickness(0, 30, 1350, 0)
                 };
                 card.NameTxtBlock.Text = item.itemName;
-                card.DescriptionTxtBlock.Text = item.itemDescription;
+                card.PriceTxtBlock.Text = item.itemPrice.ToString();
                 card.QuantityTxtBlock.Text = item.itemQuantity.ToString();
+                totalPrice += item.itemPrice * item.itemQuantity;
                 ItemPanel.Children.Add(card);
             }
+            
+            TotalPriceTxtBlock.Text = "RP" + totalPrice.ToString();
 
+        }
+
+        private void CheckoutButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            _dbService.checkoutItems(totalPrice, _user.UserUserId);
+            MessageBox.Show("Item Successfully Checked");
         }
     }
 }

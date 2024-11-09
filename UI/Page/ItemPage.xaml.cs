@@ -18,7 +18,11 @@ public partial class ItemPage : System.Windows.Controls.Page
 
     private void RoundedButton_OnClick(object sender, System.Windows.RoutedEventArgs e)
     {
+        Application.Current.Windows.OfType<Home>().FirstOrDefault()?._dbService.inputIntoCart(
+            Application.Current.Windows.OfType<Home>().FirstOrDefault().CurrentUser.UserUserId, _item
+        );
         Application.Current.Windows.OfType<Home>().FirstOrDefault()?.ContentFrame.Navigate(new CartList());
+        
     }
 
     private void RoundedButton_Loaded(object sender, System.Windows.RoutedEventArgs e)

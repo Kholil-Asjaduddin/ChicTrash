@@ -167,17 +167,16 @@ namespace ChicTrash
                 MessageBox.Show(e.Message);
             }
 
-            MessageBox.Show(cartItem[2].itemName);
             return cartItem;
         }
 
-        public void inputIntoCart(int userId, Item item, int quantity)
+        public void inputIntoCart(int userId, Item item, int quantity = 1)
         {
             using var conn = GetConnection();
             try
             {
                 conn.Open();
-                using var cmd = new NpgsqlCommand("INSERT INTO cart (user_id, item_id, quantity) VALUES (@UserId, @ItemId, @Quantity)", conn);
+                using var cmd = new NpgsqlCommand("INSERT INTO cart (user_id, item_id, quantity) VALUES (@UserId, @ItemId, @Quantity)  ON CONFLICT (user_id, item_id)  DO UPDATE SET quantity = cart.quantity + EXCLUDED.quantity;", conn);
                 cmd.Parameters.AddWithValue("@UserId", userId );
                 cmd.Parameters.AddWithValue("@ItemId", item.ItemId);
                 cmd.Parameters.AddWithValue("@Quantity", quantity);
@@ -264,6 +263,26 @@ namespace ChicTrash
             conn.Close();
         }
             return false;
+        }
+
+        public void checkoutItems(double price, int userid)
+        {
+            using var conn = GetConnection();
+            conn.Open();
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("UPDATE user_table SET money = money-@price WHERE user_id=@user_id", conn); 
+                command.Parameters.AddWithValue("user_id", userid);
+                command.Parameters.AddWithValue("price", price);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+                command.CommandText = "DELETE FROM cart WHERE user_id=@user_id";
+                command.Parameters.AddWithValue("user_id", userid);
+                command.ExecuteNonQuery();
+            } catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
     
