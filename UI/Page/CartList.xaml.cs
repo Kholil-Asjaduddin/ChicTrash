@@ -31,7 +31,7 @@ namespace ChicTrash.UI.Page
         private void ItemPanel_OnLoaded(object sender, RoutedEventArgs e)
         {
             var cartItems = _dbService.getUserCart(_user.UserUserId);
-            cartItemIds = cartItems.Select(cart => cart.ItemId).ToList();
+            cartItemIds = cartItems.Select(cart => cart.itemId).ToList();
 
             foreach (var item in cartItems)
             {
@@ -39,10 +39,10 @@ namespace ChicTrash.UI.Page
                 {
                     Margin = new Thickness(0, 30, 1350, 0)
                 };
-                card.NameTxtBlock.Text = item.ItemName;
-                card.PriceTxtBlock.Text = item.ItemPrice.ToString();
-                card.QuantityTxtBlock.Text = item.Quantity.ToString();
-                totalPrice += item.ItemPrice * item.Quantity;
+                card.NameTxtBlock.Text = item.itemName;
+                card.PriceTxtBlock.Text = item.itemPrice.ToString();
+                card.QuantityTxtBlock.Text = item.itemQuantity.ToString();
+                totalPrice += item.itemPrice * item.itemQuantity;
                 ItemPanel.Children.Add(card);
             }
 

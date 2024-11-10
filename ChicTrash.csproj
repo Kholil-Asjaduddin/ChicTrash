@@ -137,4 +137,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="UI\Images\money-svgrepo-com.png" />
+    <Resource Include="UI\Images\money-svgrepo-com.png" />
+  </ItemGroup>
+
 </Project>

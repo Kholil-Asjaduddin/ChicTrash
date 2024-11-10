@@ -376,8 +376,39 @@ namespace ChicTrash
             {
                 MessageBox.Show(e.Message);
             }
+            conn.Close();
             return articles;
         }
+
+        public List<Order> GetOrders(int user_id)
+        {
+            List<Order> orders = new List<Order>();
+            using var conn = GetConnection();
+            conn.Open();
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("SELECT order_table.order_id, item.item_id, item.item_name, user_table.address, order_table.quantity FROM order_table JOIN item ON item.item_id = order_table.item_id JOIN user_table ON order_table.customer_id = user_table.user_id WHERE order_table.seller_id = @user_id;" , conn);
+                command.Parameters.AddWithValue("user_id", user_id);
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    orders.Add(new Order
+                    {
+                        OrderId = Convert.ToInt32(reader["order_id"]),
+                        Address = Convert.ToString(reader["address"]),
+                        ProductName = Convert.ToString(reader["item_name"]),
+                        ProductId = Convert.ToInt32(reader["item_id"]),
+                        Quantity = Convert.ToInt32(reader["quantity"]),
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            conn.Close();
+            return orders;
+        } 
     }
     
     
