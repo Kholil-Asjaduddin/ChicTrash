@@ -1,5 +1,8 @@
 ﻿using System;
 using Npgsql;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows;
 using DotNetEnv;
 
 namespace ChicTrash
@@ -15,7 +18,7 @@ namespace ChicTrash
             _connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION");
         }
 
-        private NpgsqlConnection GetConnection()
+        public NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection(_connectionString);
         }
@@ -41,13 +44,15 @@ namespace ChicTrash
             var cmd = new NpgsqlCommand("SELECT * FROM user_table WHERE email = @Email AND password = @Password", conn);
             cmd.Parameters.AddWithValue("Email", email);
             cmd.Parameters.AddWithValue("Password", password);
+            
+            
 
             return cmd.ExecuteScalar() != null;
         }
 
         public User GetUserById(int userId)
         {
-            User user = null;
+            User? user  = null;
 
             try
             {
@@ -74,9 +79,9 @@ namespace ChicTrash
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error saat mencoba mendapatkan user berdasarkan ID: " + ex.Message);
+                MessageBox.Show("Error saat mencoba mendapatkan user berdasarkan ID: " + ex.Message);
             }
-
+            
             return user;
         }
 
@@ -94,7 +99,7 @@ namespace ChicTrash
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error saat mencoba mendapatkan user ID berdasarkan email: " + ex.Message);
+                MessageBox.Show("Error saat mencoba mendapatkan user ID berdasarkan email: " + ex.Message);
             }
 
             return userId;
@@ -102,10 +107,10 @@ namespace ChicTrash
         public List<Item> GetItems()
         {
             List<Item> items = new List<Item>();
+            using var conn = GetConnection();
 
             try
             {
-                using var conn = GetConnection();
                 conn.Open();
                 using var cmd = new NpgsqlCommand("SELECT * FROM item", conn);
                 using var reader = cmd.ExecuteReader();
@@ -127,11 +132,186 @@ namespace ChicTrash
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error saat mencoba mendapatkan daftar item: " + ex.Message);
+                conn.Close();
+                MessageBox.Show("Error saat mencoba mendapatkan daftar item: " + ex.Message);
             }
 
             return items;
         }
 
+        public List<Cart> getUserCart(int userId)
+        {
+            using var conn = GetConnection();
+            List<Cart> cartItem = new List<Cart>();
+            try
+            {
+                conn.Open();
+                using var cmd = new NpgsqlCommand("SELECT cart.item_id, cart.quantity, item_name, category, description, price, image FROM cart JOIN item ON item.item_id = cart.item_id AND user_id = @user_id;", conn);
+                cmd.Parameters.AddWithValue("userId", userId);
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    cartItem.Add(new Cart{
+                            itemId =  reader.GetInt32(reader.GetOrdinal("item_id")),
+                            itemPrice = reader.GetDouble(reader.GetOrdinal("price")),
+                            itemImage = reader.GetString(reader.GetOrdinal("image")),
+                            itemQuantity = reader.GetInt32(reader.GetOrdinal("quantity")),
+                            itemName = reader.GetString(reader.GetOrdinal("item_name")),
+                            itemDescription = reader.GetString(reader.GetOrdinal("description")),
+                            itemCategory = reader.GetString(reader.GetOrdinal("category"))
+                        });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return cartItem;
+        }
+
+        public void inputIntoCart(int userId, Item item, int quantity = 1)
+        {
+            using var conn = GetConnection();
+            try
+            {
+                conn.Open();
+                using var cmd = new NpgsqlCommand("INSERT INTO cart (user_id, item_id, quantity) VALUES (@UserId, @ItemId, @Quantity)  ON CONFLICT (user_id, item_id)  DO UPDATE SET quantity = cart.quantity + EXCLUDED.quantity;", conn);
+                cmd.Parameters.AddWithValue("@UserId", userId );
+                cmd.Parameters.AddWithValue("@ItemId", item.ItemId);
+                cmd.Parameters.AddWithValue("@Quantity", quantity);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            conn.Close();
+        }
+
+        public bool registerUser(User user, bool isBuyer = false, bool isSeller = false)
+        {
+            int user_id;
+            using var conn = GetConnection();
+            conn.Open();
+        try{
+            if (isBuyer == true)
+            {
+                NpgsqlCommand command =
+                    new NpgsqlCommand(
+                        "INSERT INTO user_table (user_name, email, password, phone, address, money) VALUES (@user_name , @email, @password, @phone,@address,0)",
+                        conn);
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                command.Parameters.AddWithValue("email", user.UserEmail);
+                command.Parameters.AddWithValue("password", user.UserPassword);
+                command.Parameters.AddWithValue("phone", user.UserPhone.ToString());
+                command.Parameters.AddWithValue("address", user.UserAdress);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+                command.CommandText = "SELECT user_id FROM user_table WHERE user_name=@user_name";
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                user_id = (int)command.ExecuteScalar();
+                command.CommandText = "INSERT INTO customer (customer_id, user_id) VALUES (@customer_id, @user_id)";
+                command.Parameters.AddWithValue("customer_id", Guid.NewGuid());
+                command.Parameters.AddWithValue("user_id", user_id);
+                command.ExecuteNonQuery();
+                command.CommandText = "UPDATE user_table SET customer_id=@customer_id WHERE user_id=@user_id ";
+                command.ExecuteNonQuery();
+                
+                MessageBox.Show("User created successfully");
+                return true;
+            }
+            else if (isSeller == true)
+            {
+                NpgsqlCommand command =
+                    new NpgsqlCommand(
+                        "INSERT INTO user_table ( user_name, email, password, phone, address, money) VALUES (@user_name , @email, @password, @phone,@address,0);",
+                        conn);
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                command.Parameters.AddWithValue("email", user.UserEmail);
+                command.Parameters.AddWithValue("password", user.UserPassword);
+                command.Parameters.AddWithValue("phone", user.UserPhone.ToString());
+                command.Parameters.AddWithValue("address", user.UserAdress);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+                command.CommandText = "SELECT user_id FROM user_table WHERE user_name=@user_name";
+                command.Parameters.AddWithValue("user_name", user.UserName);
+                user_id = (int)command.ExecuteScalar();
+                command.CommandText = "INSERT INTO seller (seller_id, user_id) VALUES (@seller_id, @user_id)";
+                command.Parameters.AddWithValue("seller_id", Guid.NewGuid());
+                command.Parameters.AddWithValue("user_id", user_id);
+                command.ExecuteNonQuery();
+                command.CommandText = "UPDATE user_table SET seller_id=@seller_id WHERE user_id=@user_id ";
+                command.ExecuteNonQuery();
+                
+                MessageBox.Show("User created successfully");
+                conn.Close();
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Please select an option");
+                return false;
+            }
+            
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+            conn.Close();
+        }
+            return false;
+        }
+
+        public void checkoutItems(double price, int userid)
+        {
+            using var conn = GetConnection();
+            conn.Open();
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("UPDATE user_table SET money = money-@price WHERE user_id=@user_id", conn); 
+                command.Parameters.AddWithValue("user_id", userid);
+                command.Parameters.AddWithValue("price", price);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+                command.CommandText = "DELETE FROM cart WHERE user_id=@user_id";
+                command.Parameters.AddWithValue("user_id", userid);
+                command.ExecuteNonQuery();
+            } catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public List<Article> GetArticles()
+        {
+            List<Article> articles = new List<Article>();
+            using var conn = GetConnection();
+            conn.Open();
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM article", conn);
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    articles.Add(new Article
+                        {
+                            ArticleId = Convert.ToInt32(reader["article_id"]),
+                            Title = reader["title"].ToString(),
+                            Content = reader["content"].ToString(),
+                        }
+                    );
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return articles;
+        }
     }
+    
+    
 }

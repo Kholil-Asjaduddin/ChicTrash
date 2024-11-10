@@ -8,11 +8,13 @@ public partial class Home : Window
     public readonly DatabaseService _dbService;
     public Customer CurrentCustomer { get; private set; }
     public Seller CurrentSeller { get; private set; }
+    public User CurrentUser { get; private set; }
+    public readonly Action<System.Windows.Controls.Page> _navigate;        
     public Home()
     {
         InitializeComponent();
         _dbService = new DatabaseService();
-        OpenLoginPage();
+        OpenLoginPage();        
 
         // Set the window to fit the screen size and allow resizing
         this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -21,7 +23,10 @@ public partial class Home : Window
         this.ResizeMode = ResizeMode.CanResize;
     }
 
-   
+    public void setUser(User user)
+    {
+        CurrentUser = user;
+    }
 
     private void IconButton_OnClick(object sender, RoutedEventArgs e)
     {
@@ -46,41 +51,53 @@ public partial class Home : Window
 
     public void OpenLoginPage()
     {
-        LoginPage loginPage = new LoginPage(_dbService, page => ContentFrame.Navigate(page));
+        LoginPage loginPage = new LoginPage(_dbService, _navigate);
         ContentFrame.Navigate(loginPage);
     }
 
     public void SetUserRole(int userId)
     {
-        var user = _dbService.GetUserById(userId);
+        
+        try
+        {
+            var user = _dbService.GetUserById(userId);
+            CurrentUser = new User
+            {
+                
+                UserUserId = user.UserUserId,
+                UserName = user.UserName,
+                UserEmail = user.UserEmail,
+                UserPassword = user.UserPassword,
+                UserPhone = user.UserPhone,
+                UserAdress = user.UserAdress,
+                UserMoney = user.UserMoney,
+                
+            };
+            MessageBox.Show(CurrentUser.ToString());
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message);
+        }
+        
 
-        if (user.SellerId == null)
-        {
-            CurrentCustomer = new Customer
-            {
-                UserUserId = user.UserUserId,
-                UserName = user.UserName,
-                UserEmail = user.UserEmail,
-                UserPassword = user.UserPassword,
-                UserPhone = user.UserPhone,
-                UserAdress = user.UserAdress,
-                UserMoney = user.UserMoney,
-                CustomerId = user.CustomerId.ToString()
-            };
-        }
-        else
-        {
-            CurrentSeller = new Seller
-            {
-                UserUserId = user.UserUserId,
-                UserName = user.UserName,
-                UserEmail = user.UserEmail,
-                UserPassword = user.UserPassword,
-                UserPhone = user.UserPhone,
-                UserAdress = user.UserAdress,
-                UserMoney = user.UserMoney,
-                SellerId = user.SellerId.ToString()
-            };
-        }
+        // if (user.SellerId == null)
+        // {
+            
+        // }
+        // else
+        // {
+        //     CurrentSeller = new Seller
+        //     {
+        //         UserUserId = user.UserUserId,
+        //         UserName = user.UserName,
+        //         UserEmail = user.UserEmail,
+        //         UserPassword = user.UserPassword,
+        //         UserPhone = user.UserPhone,
+        //         UserAdress = user.UserAdress,
+        //         UserMoney = user.UserMoney,
+        //         SellerId = user.SellerId.ToString()
+        //     };
+        // }
     }
 }

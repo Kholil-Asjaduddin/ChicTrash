@@ -1,6 +1,7 @@
 ﻿using ChicTrash.UI.Component;
 using ChicTrash.UI.Windows;
 using System.Windows;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -9,6 +10,7 @@ namespace ChicTrash.UI.Page;
 public partial class CommercePage : System.Windows.Controls.Page
 {
     private Home homeWindow;
+
 
     public CommercePage()
     {
@@ -69,4 +71,5 @@ public partial class CommercePage : System.Windows.Controls.Page
             }
         }
     }
+    
 }

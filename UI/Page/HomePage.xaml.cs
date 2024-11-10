@@ -12,10 +12,15 @@ public partial class HomePage : System.Windows.Controls.Page
 {
     private Customer _customer;
     private Seller _seller;
+    private User _user;
     private Home homeWindow;
+    
+
+    
     public HomePage()
     {
         InitializeComponent();
+
         homeWindow = Application.Current.Windows.OfType<Home>().FirstOrDefault();
         FetchUserInfo();
         UpdateProfileBalanceCard();
@@ -28,6 +33,7 @@ public partial class HomePage : System.Windows.Controls.Page
         {
             _customer = homeWindow.CurrentCustomer;
             _seller = homeWindow.CurrentSeller;
+            _user = homeWindow.CurrentUser;
         }
     }
 
@@ -96,7 +102,7 @@ public partial class HomePage : System.Windows.Controls.Page
                 // Add MouseLeftButtonUp event handler
                 itemCard.MouseLeftButtonUp += (sender, e) =>
                 {
-                    homeWindow.ContentFrame.Navigate(new ItemPage(item));
+                    homeWindow.ContentFrame.Navigate(new ItemPage(item ));
                 };
 
                 // Set margin dynamically

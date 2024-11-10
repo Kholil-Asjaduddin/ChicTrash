@@ -7,39 +7,33 @@
       xmlns:component="clr-namespace:ChicTrash.UI.Component"
       mc:Ignorable="d"
       Title="CommercePage" Height="1080" Width="1720">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- For RoundedTextBox -->
-            <RowDefinition Height="*"/>
-            <!-- For ScrollViewer -->
-        </Grid.RowDefinitions>
-        <component:RoundedTextBox Width="878" Height="40" Grid.Row="0" Margin="0,10,0,10">
+    <ScrollViewer>
+        <StackPanel>
+        <component:RoundedTextBox Width="878" Height="40" Grid.Row="0" Margin="0,10,300,10">
             <component:RoundedTextBox.RenderTransform>
                 <TranslateTransform X="0" Y="0"></TranslateTransform>
                 <!-- Adjusted the translation -->
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
         <!-- Card Layout -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
-                <TextBlock Text="Waste" FontSize="24" FontWeight="Bold" Margin="420,10,10,10" HorizontalAlignment="Left"/>
-                <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray" HorizontalAlignment="Center"/>
+            <StackPanel >
+                <TextBlock Text="Waste" FontSize="24" FontWeight="Bold" Margin="280,10,0,10"/>
+                <Separator Margin="0,5,300,0" Width="878" Height="5" Background="Gray" BorderBrush="Gray" HorizontalAlignment="Center"/>
 
-                <WrapPanel x:Name="wrapPanelWaste" ItemWidth="220" Width="880" Margin="0,0,0,20" HorizontalAlignment="Center">
+                <WrapPanel x:Name="wrapPanelWaste" ItemWidth="220" Width="880" Margin="0,0,310,20" HorizontalAlignment="Center">
                     <!-- ItemCards will be added here dynamically -->
                 </WrapPanel>
 
-                <TextBlock Text="Recycled Items" FontSize="24" FontWeight="Bold" Margin="420,10,10,10" HorizontalAlignment="Left"/>
-                <Separator Margin="0,5" Width="878" Height="5" Background="Gray" BorderBrush="Gray" HorizontalAlignment="Center"/>
+                <TextBlock Text="Recycled Items" FontSize="24" FontWeight="Bold" Margin="280,10,10,10" />
+                <Separator Margin="0,5,300,0" Width="878" Height="5" Background="Gray" BorderBrush="Gray" HorizontalAlignment="Center"/>
 
-                <WrapPanel x:Name="wrapPanelRecycled" ItemWidth="220" Width="880" HorizontalAlignment="Center">
-                    <!-- ItemCards will be added here dynamically -->
+                <WrapPanel x:Name="wrapPanelRecycled" ItemWidth="220" Width="880" Margin="0,0,310,20">
+                    
                 </WrapPanel>
 
                 <!-- Adding extra space at the bottom -->
-                <TextBlock Height="200"/>
+                <TextBlock Height="500"/>
             </StackPanel>
-        </ScrollViewer>
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

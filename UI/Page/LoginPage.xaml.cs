@@ -22,12 +22,18 @@ public partial class LoginPage : System.Windows.Controls.Page
     {
         if (_dbService.ValidateUser(EmailTxtBox.Text, PasswordTxtBox.Text))
         {
-            var homeWindow = Application.Current.Windows.OfType<Home>().FirstOrDefault();
-            if (homeWindow != null)
+            try
             {
-                homeWindow.SetUserRole(_dbService.GetUserIdByEmail(EmailTxtBox.Text));
-                _navigate(new HomePage());
+                Application.Current.Windows.OfType<Home>().FirstOrDefault()?
+                    .SetUserRole(_dbService.GetUserIdByEmail(EmailTxtBox.Text));
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            Application.Current.Windows.OfType<Home>().FirstOrDefault()?.ContentFrame.Navigate(new HomePage());
+            
         }
         else
         {
@@ -37,6 +43,6 @@ public partial class LoginPage : System.Windows.Controls.Page
 
     private void TestClick(object sender, RoutedEventArgs e)
     {
-        _navigate(new RegisterPage(_navigate));
+        Application.Current.Windows.OfType<Home>().FirstOrDefault().ContentFrame.Navigate(new RegisterPage(_navigate, _dbService));
     }
 }
