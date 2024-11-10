@@ -284,6 +284,33 @@ namespace ChicTrash
                 MessageBox.Show(e.Message);
             }
         }
+
+        public List<Article> GetArticles()
+        {
+            List<Article> articles = new List<Article>();
+            using var conn = GetConnection();
+            conn.Open();
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM article", conn);
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    articles.Add(new Article
+                        {
+                            ArticleId = Convert.ToInt32(reader["article_id"]),
+                            Title = reader["title"].ToString(),
+                            Content = reader["content"].ToString(),
+                        }
+                    );
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return articles;
+        }
     }
     
     

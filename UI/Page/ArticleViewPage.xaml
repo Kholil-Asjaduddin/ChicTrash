@@ -1,0 +1,24 @@
+﻿<Page x:Class="ChicTrash.UI.Page.ArticleViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ChicTrash.UI.Page"
+      mc:Ignorable="d"
+      Title="ArticleViewPage" Height="1080" Width="1720">
+    <StackPanel>
+        <TextBlock x:Name="ArticleTitleTxtBlock" FontFamily="Pack">
+            <TextBlock.RenderTransform>
+                <TranslateTransform X="600"></TranslateTransform>
+            </TextBlock.RenderTransform>
+            Title
+        </TextBlock>
+        <TextBlock x:Name="ArticleDescriptionTxtBlock" MaxWidth="1000" MaxHeight="1000">
+            <TextBlock.RenderTransform>
+            <TranslateTransform X="0"></TranslateTransform>
+        </TextBlock.RenderTransform>
+            Description
+        </TextBlock>
+    </StackPanel>
+    
+</Page>
