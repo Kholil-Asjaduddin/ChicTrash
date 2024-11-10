@@ -265,26 +265,93 @@ namespace ChicTrash
             return false;
         }
 
-        public void checkoutItems(double price, int userid)
+        public void checkoutItems(List<int> cartItemIds, double totalPrice)
         {
             using var conn = GetConnection();
             conn.Open();
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand("UPDATE user_table SET money = money-@price WHERE user_id=@user_id", conn); 
-                command.Parameters.AddWithValue("user_id", userid);
-                command.Parameters.AddWithValue("price", price);
-                command.ExecuteNonQuery();
-                command.Parameters.Clear();
-                command.CommandText = "DELETE FROM cart WHERE user_id=@user_id";
-                command.Parameters.AddWithValue("user_id", userid);
-                command.ExecuteNonQuery();
-            } catch (Exception e)
+                // Ambil user_id dari salah satu item di cart
+                int userId = -1;
+                using (var cmd = new NpgsqlCommand("SELECT user_id FROM cart WHERE item_id = @ItemId LIMIT 1", conn))
+                {
+                    cmd.Parameters.AddWithValue("ItemId", cartItemIds.First());
+                    userId = (int)cmd.ExecuteScalar();
+                }
+
+                if (userId != -1)
+                {
+                    // Mengambil list item_id, quantity, dan seller_id dari cartItemIds
+                    List<(int itemId, int quantity, int sellerUserId)> cartItems = new List<(int itemId, int quantity, int sellerUserId)>();
+                    foreach (var itemId in cartItemIds)
+                    {
+                        // Akses semua record pada tabel item dengan item_id yang sesuai
+                        using (var cmd = new NpgsqlCommand("SELECT item_id, quantity, seller_id FROM cart JOIN item ON cart.item_id = item.item_id WHERE cart.user_id = @UserId AND cart.item_id = @ItemId", conn))
+                        {
+                            cmd.Parameters.AddWithValue("UserId", userId);
+                            cmd.Parameters.AddWithValue("ItemId", itemId);
+                            using (var reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    int itemSellerId = reader.GetInt32(reader.GetOrdinal("seller_id"));
+
+                                    // Gunakan seller_id tersebut untuk mengakses user_table
+                                    int sellerUserId;
+                                    using (var cmdUser = new NpgsqlCommand("SELECT user_id FROM user_table WHERE seller_id = @SellerId", conn))
+                                    {
+                                        cmdUser.Parameters.AddWithValue("SellerId", itemSellerId);
+                                        sellerUserId = (int)cmdUser.ExecuteScalar();
+                                    }
+
+                                    // Tambahkan data yang diperlukan ke list cartItems
+                                    cartItems.Add((reader.GetInt32(reader.GetOrdinal("item_id")), reader.GetInt32(reader.GetOrdinal("quantity")), sellerUserId));
+                                }
+                            }
+                        }
+                    }
+
+                    // Insert record baru ke order_table
+                    foreach (var (itemId, quantity, sellerUserId) in cartItems)
+                    {
+                        using (var cmd = new NpgsqlCommand("INSERT INTO order_table (customer_id, seller_id, item_id, quantity) VALUES (@CustomerId, @SellerId, @ItemId, @Quantity)", conn))
+                        {
+                            cmd.Parameters.AddWithValue("CustomerId", userId);
+                            cmd.Parameters.AddWithValue("SellerId", sellerUserId);
+                            cmd.Parameters.AddWithValue("ItemId", itemId);
+                            cmd.Parameters.AddWithValue("Quantity", quantity);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Mengurangi uang pengguna sebesar harga total item di keranjang
+                    using (var cmd = new NpgsqlCommand("UPDATE user_table SET money = money - @price WHERE user_id = @user_id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("user_id", userId);
+                        cmd.Parameters.AddWithValue("price", totalPrice);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // Mengosongkan keranjang belanja pengguna setelah checkout
+                    using (var cmd = new NpgsqlCommand("DELETE FROM cart WHERE user_id = @user_id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("user_id", userId);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Item Successfully Checked");
+                }
+                else
+                {
+                    throw new Exception("User ID tidak ditemukan di cart.");
+                }
+            }
+            catch (Exception e)
             {
+                // Menangani kesalahan dan menampilkan pesan kesalahan
                 MessageBox.Show(e.Message);
             }
         }
-
         public List<Article> GetArticles()
         {
             List<Article> articles = new List<Article>();
