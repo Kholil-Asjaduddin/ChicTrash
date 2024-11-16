@@ -20,6 +20,6 @@
         <component:RoundedTextBox x:Name="NewPasswordTxtBox" Margin="140,5,1100,0"></component:RoundedTextBox>
         
         <component:RoundedButton Margin="0,50,1250,0" ButtonText="Update" ButtonBackgroundHover="#18A179" Click="UpdateProfile" ButtonBackground="#96CBBC" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="24"></component:RoundedButton>
-        <component:TopUpCard x:Name="TopUpCard" Height="300" Margin="700,-500,750,0"></component:TopUpCard>
+        <component:TopUpCard x:Name="TopUpCard" Height="300" Margin="700,-500,750,0"/>
     </StackPanel>
 </Page>

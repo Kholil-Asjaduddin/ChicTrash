@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net.Mime;
+using System.Windows;
 using System.Windows.Controls;
 using ChicTrash.UI.Windows;
 
@@ -12,6 +13,7 @@ public partial class UpdateProfilePage : System.Windows.Controls.Page
     {
         _dbService = Application.Current.Windows.OfType<Home>().FirstOrDefault()._dbService;
         InitializeComponent();
+        TopUpCard.TopUpButton.Click += UpdateProfileBalance;
     }
 
     public void TopUpBalance()
@@ -22,5 +24,10 @@ public partial class UpdateProfilePage : System.Windows.Controls.Page
     public void UpdateProfile(object sender, RoutedEventArgs e)
     {
         _dbService.UpdateUserDetails(Application.Current.Windows.OfType<Home>().FirstOrDefault().CurrentUser.UserUserId, AddressTxtBox.Text, PhoneNumberTxtBox.Text, NewPasswordTxtBox.Text);
+    }
+
+    public void UpdateProfileBalance(object sender, RoutedEventArgs e)
+    {
+        _dbService.TopUpUserMoney(Application.Current.Windows.OfType<Home>().FirstOrDefault().CurrentUser.UserUserId, double.Parse(TopUpCard.TopupTxtBox.Text));
     }
 }
