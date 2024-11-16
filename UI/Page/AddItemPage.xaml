@@ -1,0 +1,36 @@
+﻿<Page x:Class="ChicTrash.UI.Page.AddItemPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ChicTrash.UI.Page"
+      xmlns:component="clr-namespace:ChicTrash.UI.Component"
+      mc:Ignorable="d"
+      Title="AddItemPage" Height="1080" Width="1720">
+      <StackPanel>
+            <TextBlock Margin="140,0,0,0" FontSize="26" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="DemiBold">Add Item</TextBlock>
+            <Separator Width="800" Margin="0,0,630,0" Height="10"></Separator>
+            
+            <TextBlock Margin="140,20,0,0" FontSize="22" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="Medium">Name</TextBlock>
+            <component:RoundedTextBox x:Name="NameTxtBox" Margin="140,5,1100,0"></component:RoundedTextBox>
+            
+            <TextBlock Margin="140,20,0,0" FontSize="22" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="Medium">Quantity</TextBlock>
+            <component:RoundedTextBox x:Name="QuantityTxtBox" Margin="140,5,1100,0"></component:RoundedTextBox>
+            
+            <TextBlock Margin="140,20,0,0" FontSize="22" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="Medium">Description</TextBlock>
+            <component:RoundedTextBox x:Name="DescriptionTxtBox" Margin="140,5,1100,0" Height="200"></component:RoundedTextBox>
+            
+            <TextBlock  Margin="140,20,0,0" FontSize="22" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="Medium">Price</TextBlock>
+            <component:RoundedTextBox x:Name="PriceTxtBox" Margin="140,5,1100,0" Placeholder="Must be a number"></component:RoundedTextBox>
+            
+            <TextBlock  Margin="140,20,0,0" FontSize="22" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontWeight="Medium">Image</TextBlock>
+            <component:RoundedTextBox x:Name="ImageTxtBox" Margin="140,5,1100,0" Placeholder="Must Be A Link"></component:RoundedTextBox>
+            
+            <WrapPanel>
+                  <RadioButton x:Name ="RecycledRadioButton" Margin="150,10,0,0" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins">Recycled</RadioButton>
+                  <RadioButton x:Name ="WasteRadioButton" Margin="150,10,0,0" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins">Waste</RadioButton>
+            </WrapPanel>
+            <component:RoundedButton Click="UploadButton_Click" Margin="0,20,1250,0" ButtonText="Upload" ButtonBackgroundHover="#18A179"  ButtonBackground="#96CBBC" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="24"></component:RoundedButton>
+
+      </StackPanel>
+</Page>

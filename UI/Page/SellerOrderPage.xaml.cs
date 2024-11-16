@@ -45,8 +45,8 @@ public partial class SellerOrderPage : System.Windows.Controls.Page
 
     }
 
-    private void CheckoutButton_OnClick(object sender, RoutedEventArgs e)
+    private void AddButton_OnClick(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show("Item Successfully Checked");
+        Application.Current.Windows.OfType<Home>().FirstOrDefault().ContentFrame.Navigate(new AddItemPage());
     }
 }

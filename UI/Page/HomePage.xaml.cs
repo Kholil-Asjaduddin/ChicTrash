@@ -63,6 +63,10 @@ public partial class HomePage : System.Windows.Controls.Page
             {
                 homeWindow.OpenLoginPage();
             }
+            else
+            {
+                homeWindow.ContentFrame.Navigate(new UpdateProfilePage());
+            }
         }
 
     }

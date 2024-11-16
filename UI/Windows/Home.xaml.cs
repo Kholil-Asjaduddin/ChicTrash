@@ -88,7 +88,7 @@ public partial class Home : Window
                     CustomerId = user.CustomerId
                 };
             }
-            else
+            else if (user.SellerId != null)
             {
                 CurrentSeller = new Seller
                 {
@@ -99,7 +99,7 @@ public partial class Home : Window
                     UserPhone = user.UserPhone,
                     UserAdress = user.UserAdress,
                     UserMoney = user.UserMoney,
-                    SellerId = user.SellerId.ToString()
+                    SellerId = user.SellerId ?? Guid.Empty
                 };
             }
             MessageBox.Show(CurrentUser.ToString());
@@ -115,6 +115,13 @@ public partial class Home : Window
     }
     public void IconButton4_OnClick(object sender, RoutedEventArgs e)
     {
+        if (CurrentSeller != null)
+        {
             ContentFrame.Navigate(new SellerOrderPage());
+        }
+        else
+        {
+            MessageBox.Show("Login as seller first");
+        }
     }
 }

@@ -9,9 +9,9 @@ namespace ChicTrash
     public class Seller : User
     {
         //Properties
-        private string _sellerId;
+        private Guid _sellerId;
 
-        public string SellerId
+        public Guid SellerId
         {
             get { return _sellerId; }
             set { _sellerId = value; }

@@ -72,8 +72,8 @@ namespace ChicTrash
                         UserPhone = reader.GetString(reader.GetOrdinal("phone")),
                         UserAdress = reader.GetString(reader.GetOrdinal("address")),
                         UserMoney = reader.GetDouble(reader.GetOrdinal("money")),
-                        SellerId = reader.IsDBNull(reader.GetOrdinal("seller_id")) ? null : reader.GetGuid(reader.GetOrdinal("seller_id")).ToString(),
-                        CustomerId = reader.IsDBNull(reader.GetOrdinal("customer_id")) ? null : reader.GetGuid(reader.GetOrdinal("customer_id")).ToString()
+                        SellerId = reader.IsDBNull(reader.GetOrdinal("seller_id")) ? null : reader.GetGuid(reader.GetOrdinal("seller_id")),
+                        CustomerId = reader.IsDBNull(reader.GetOrdinal("customer_id")) ? null : reader.GetGuid(reader.GetOrdinal("customer_id"))
                     };
                 }
             }
@@ -408,8 +408,92 @@ namespace ChicTrash
             }
             conn.Close();
             return orders;
-        } 
+        }
+        
+        public void UploadItems(Guid seller_id, string name ,int quantity, double price, string description, string imagePath, string category)
+        {
+            using var conn = GetConnection();
+            try
+            {
+                conn.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            try
+            {
+                NpgsqlCommand command = new NpgsqlCommand("INSERT INTO item (seller_id, item_name, category, description, price, quantity, image) VALUES (@seller_id, @name, @category, @description, @price, @quantity, @image)", conn);
+                command.Parameters.AddWithValue("seller_id", seller_id);
+                command.Parameters.AddWithValue("name", name);
+                command.Parameters.AddWithValue("category", category);
+                command.Parameters.AddWithValue("description", description);
+                command.Parameters.AddWithValue("price", price);
+                command.Parameters.AddWithValue("quantity", quantity);
+                command.Parameters.AddWithValue("image", imagePath);
+                command.ExecuteNonQuery();
+                MessageBox.Show("Item Successfully Uploaded");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            conn.Close();
+
+        }
+
+        public void UpdateUserDetails(int userId, string newAddress = null, string newPhone = null,
+            string newPassword = null)
+        {
+            // Build the SQL command dynamically based on non-null values
+            string query = "UPDATE user_table SET ";
+            bool firstField = true;
+
+            if (newAddress != "")
+            {
+                query += "address = @newAddress";
+                firstField = false;
+            }
+
+            if (newPhone != "")
+            {
+                if (!firstField) query += ", ";
+                query += "phone = @newPhone";
+                firstField = false;
+            }
+
+            if (newPassword != "")
+            {
+                if (!firstField) query += ", ";
+                query += "password = @newPassword";
+            }
+            
+            query += " WHERE user_id = @userId;";
+            using var conn = GetConnection();
+            conn.Open();
+            try
+            {
+            using var command = new NpgsqlCommand(query, conn);
+            command.Parameters.AddWithValue("userId", userId);
+            if (newAddress != null) command.Parameters.AddWithValue("newAddress", newAddress);
+            if (newPhone != null) command.Parameters.AddWithValue("newPhone", newPhone);
+            if (newPassword != null) command.Parameters.AddWithValue("newPassword", newPassword);
+            
+            command.ExecuteNonQuery();
+            MessageBox.Show("User Successfully Updated");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            conn.Close();
+
+        }
+        
+        
     }
     
+   
     
 }
