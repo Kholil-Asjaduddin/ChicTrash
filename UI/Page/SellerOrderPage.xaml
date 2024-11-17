@@ -43,6 +43,11 @@
                     <TranslateTransform X="220" Y="-500"></TranslateTransform>
                 </Border.RenderTransform>
                 <StackPanel HorizontalAlignment="Right">
+                    <component:RoundedButton ButtonText="Your Item" x:Name="ItemButton" Click="ItemButton_OnClick" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
+                        <component:RoundedButton.RenderTransform>
+                            <TranslateTransform X="-120" Y="480"></TranslateTransform>
+                        </component:RoundedButton.RenderTransform>
+                    </component:RoundedButton>
                     <component:RoundedButton ButtonText="Add Item" x:Name="CheckoutButton" Click="AddButton_OnClick" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
                         <component:RoundedButton.RenderTransform>
                             <TranslateTransform X="-120" Y="500"></TranslateTransform>

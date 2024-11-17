@@ -553,7 +553,139 @@ namespace ChicTrash
 
             conn.Close();
         }
+
+        public void EditItem(int item_id, string description, string price, string quantity, string imagePath)
+        {
+            using var conn = GetConnection();
+            conn.Open();
+            
+            // Start query construction
+            string query = "UPDATE item SET ";
+            bool firstField = true;
+
+            try
+            {
+                using NpgsqlCommand cmd = new NpgsqlCommand();
+                cmd.Connection = conn;
+
+                // Dynamically build the query
+                if (!string.IsNullOrWhiteSpace(description))
+                {
+                    query += "description = @description";
+                    cmd.Parameters.AddWithValue("description", description);
+                    firstField = false;
+                }
+
+                if (!string.IsNullOrWhiteSpace(price))
+                {
+                    double numPrice;
+                    if (!double.TryParse(price, out numPrice))
+                    {
+                        throw new ArgumentException("Invalid price value.");
+                    }
+
+                    query += (firstField ? "" : ", ") + "price = @price";
+                    cmd.Parameters.AddWithValue("price", numPrice);
+                    firstField = false;
+                }
+
+                if (!string.IsNullOrWhiteSpace(quantity))
+                {
+                    double newQuantity;
+                    if (!double.TryParse(quantity, out newQuantity))
+                    {
+                        throw new ArgumentException("Invalid quantity value.");
+                    }
+
+                    query += (firstField ? "" : ", ") + "quantity = @quantity";
+                    cmd.Parameters.AddWithValue("quantity", newQuantity);
+                    firstField = false;
+                }
+
+                if (!string.IsNullOrWhiteSpace(imagePath))
+                {
+                    query += (firstField ? "" : ", ") + "image = @image";
+                    cmd.Parameters.AddWithValue("image", imagePath);
+                }
+
+                // Add the WHERE clause
+                query += " WHERE item_id = @item_id";
+                cmd.Parameters.AddWithValue("item_id", item_id);
+
+                // Assign the built query to the command text
+                cmd.CommandText = query;
+
+                // Execute the query
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Item Successfully Updated");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error: {e.Message}");
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void DeleteItem(int item_id)
+        {
+            using var conn = GetConnection();
+            conn.Open();
+            try
+            {
+                NpgsqlCommand cmd = new NpgsqlCommand("DELETE FROM item WHERE item_id = @item_id", conn);
+                cmd.Parameters.AddWithValue("item_id", item_id);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Item Successfully Deleted");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            conn.Close();
+        }
+
+        public List<Item> getSellerItem(Guid user_id)
+        {
+            using var conn = GetConnection();
+            conn.Open();
+            List<Item> sellerItems = new List<Item>();
+            try
+            {
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM item WHERE seller_id = @user_id;", conn);
+                cmd.Parameters.AddWithValue("user_id", user_id);
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    sellerItems.Add(new Item
+                    {
+                        ItemId = reader.GetInt32(reader.GetOrdinal("item_id")),
+                        SellerId = reader.GetGuid(reader.GetOrdinal("seller_id")),
+                        CustomerId = reader.IsDBNull(reader.GetOrdinal("customer_id"))
+                            ? (Guid?)null
+                            : reader.GetGuid(reader.GetOrdinal("customer_id")),
+                        ItemName = reader.GetString(reader.GetOrdinal("item_name")),
+                        Category = reader.GetString(reader.GetOrdinal("category")),
+                        Description = reader.GetString(reader.GetOrdinal("description")),
+                        Price = (double)reader.GetDecimal(reader.GetOrdinal("price")),
+                        Quantity = reader.GetInt32(reader.GetOrdinal("quantity")),
+                        Image = reader.IsDBNull(reader.GetOrdinal("image"))
+                            ? null
+                            : reader.GetString(reader.GetOrdinal("image")) // Check if image is fetched properly
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+            conn.Close();
+            return sellerItems;
+        }
     }
-
-
+   
 }

@@ -6,19 +6,19 @@ using ChicTrash.UI.Windows;
 
 namespace ChicTrash.UI.Page;
 
-public partial class SellerOrderPage : System.Windows.Controls.Page
+public partial class SellerItemPage : System.Windows.Controls.Page
 {
-    public User _user;
+    
+    public Seller _user;
     public DatabaseService _dbService;
-
-    public SellerOrderPage()
+    public List<Item> _items;
+    public SellerItemPage()
     {
         InitializeComponent();
         _dbService = Application.Current.Windows.OfType<Home>().FirstOrDefault()._dbService;
-        _user  = Application.Current.Windows.OfType<Home>().FirstOrDefault().CurrentUser;
-
+        _user  = Application.Current.Windows.OfType<Home>().FirstOrDefault().CurrentSeller;
     }
-
+    
     private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.ChangedButton == MouseButton.Left)
@@ -29,29 +29,22 @@ public partial class SellerOrderPage : System.Windows.Controls.Page
 
     private void ItemPanel_OnLoaded(object sender, RoutedEventArgs e)
     {
-        var itemOrdered = _dbService.GetOrders(_user.UserUserId);
+        var itemOrdered = _dbService.getSellerItem(_user.SellerId);
         foreach (var item in itemOrdered)
         {
-            var card = new CartItemCard
+            var card = new UpdateCard(item)
             {
                 Margin = new Thickness(0, 30, 1350, 0)
             };
-            card.NameTxtBlock.Text = item.ProductName;
-            card.PriceTxtBlock.Text = item.Address;
+            card.NameTxtBlock.Text = item.ItemName;
+            card.PriceTxtBlock.Text = item.Price.ToString();
             card.QuantityTxtBlock.Text = item.Quantity.ToString();
             ItemPanel.Children.Add(card);
         }
             
 
     }
-
-    private void AddButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        Application.Current.Windows.OfType<Home>().FirstOrDefault().ContentFrame.Navigate(new AddItemPage());
-    }
     
-
-    private void ItemButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        Application.Current.Windows.OfType<Home>().FirstOrDefault().ContentFrame.Navigate(new SellerItemPage());    }
+    
+    
 }
