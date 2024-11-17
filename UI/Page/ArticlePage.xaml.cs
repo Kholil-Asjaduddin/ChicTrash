@@ -27,6 +27,7 @@ public partial class ArticlePage : System.Windows.Controls.Page
                 
             };
             Article.productName.Text = article.Title;
+            Article.productPrice.Text = "";
             ArticleWrapPanel.Children.Add(Article);
             
             Article.MouseLeftButtonUp += (sender, e) =>
