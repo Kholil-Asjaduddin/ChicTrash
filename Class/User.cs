@@ -16,8 +16,8 @@ namespace ChicTrash
         private string _userPhone;
         private string _userAdress;
         private double _userMoney;
-        private string? _sellerId;
-        private string? _customerId;
+        private Guid? _sellerId;
+        private Guid? _customerId;
 
         public string UserName
         {
@@ -56,13 +56,13 @@ namespace ChicTrash
             get { return _userId; }
             set { _userId = value; }
         }
-        public string? SellerId
+        public Guid? SellerId
         {
             get { return _sellerId; }
             set { _sellerId = value; }
         }
 
-        public string? CustomerId
+        public Guid? CustomerId
         {
             get { return _customerId; }
             set { _customerId = value; }

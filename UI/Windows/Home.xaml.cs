@@ -73,6 +73,35 @@ public partial class Home : Window
                 UserMoney = user.UserMoney,
                 
             };
+            
+            if (user.SellerId == null)
+            {
+                CurrentCustomer = new Customer
+                {
+                    UserUserId = user.UserUserId,
+                    UserName = user.UserName,
+                    UserEmail = user.UserEmail,
+                    UserPassword = user.UserPassword,
+                    UserPhone = user.UserPhone,
+                    UserAdress = user.UserAdress,
+                    UserMoney = user.UserMoney,
+                    CustomerId = user.CustomerId
+                };
+            }
+            else if (user.SellerId != null)
+            {
+                CurrentSeller = new Seller
+                {
+                    UserUserId = user.UserUserId,
+                    UserName = user.UserName,
+                    UserEmail = user.UserEmail,
+                    UserPassword = user.UserPassword,
+                    UserPhone = user.UserPhone,
+                    UserAdress = user.UserAdress,
+                    UserMoney = user.UserMoney,
+                    SellerId = user.SellerId ?? Guid.Empty
+                };
+            }
             MessageBox.Show(CurrentUser.ToString());
         }
         catch (Exception e)
@@ -81,23 +110,18 @@ public partial class Home : Window
         }
         
 
-        // if (user.SellerId == null)
-        // {
-            
-        // }
-        // else
-        // {
-        //     CurrentSeller = new Seller
-        //     {
-        //         UserUserId = user.UserUserId,
-        //         UserName = user.UserName,
-        //         UserEmail = user.UserEmail,
-        //         UserPassword = user.UserPassword,
-        //         UserPhone = user.UserPhone,
-        //         UserAdress = user.UserAdress,
-        //         UserMoney = user.UserMoney,
-        //         SellerId = user.SellerId.ToString()
-        //     };
-        // }
+        
+        
+    }
+    public void IconButton4_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (CurrentSeller != null)
+        {
+            ContentFrame.Navigate(new SellerOrderPage());
+        }
+        else
+        {
+            MessageBox.Show("Login as seller first");
+        }
     }
 }
