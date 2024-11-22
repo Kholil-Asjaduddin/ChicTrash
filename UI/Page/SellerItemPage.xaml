@@ -51,11 +51,6 @@
                 </Border>
                 
         
-        <Button Width="160" Margin="90,0,0,300" HorizontalAlignment="Left">
-            <Button.RenderTransform>
-                <TranslateTransform Y="-780"></TranslateTransform>
-            </Button.RenderTransform>
-            <TextBlock> Back To Shop!</TextBlock>
-        </Button>
+       
     </StackPanel>
 </Page>
