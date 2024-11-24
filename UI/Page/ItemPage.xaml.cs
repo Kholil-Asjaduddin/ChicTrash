@@ -21,8 +21,16 @@ public partial class ItemPage : System.Windows.Controls.Page
         Application.Current.Windows.OfType<Home>().FirstOrDefault()?._dbService.inputIntoCart(
             Application.Current.Windows.OfType<Home>().FirstOrDefault().CurrentUser.UserUserId, _item
         );
+        MessageBox.Show("Item successfully added to cart.");
+    }
+
+    private void RoundedButton1_OnClick(object sender, System.Windows.RoutedEventArgs e)
+    {
+        Application.Current.Windows.OfType<Home>().FirstOrDefault()?._dbService.inputIntoCart(
+            Application.Current.Windows.OfType<Home>().FirstOrDefault().CurrentUser.UserUserId, _item
+        );
         Application.Current.Windows.OfType<Home>().FirstOrDefault()?.ContentFrame.Navigate(new CartList());
-        
+
     }
 
     private void RoundedButton_Loaded(object sender, System.Windows.RoutedEventArgs e)
