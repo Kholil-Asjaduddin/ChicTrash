@@ -53,27 +53,12 @@
                             <TranslateTransform X="-120" Y="500"></TranslateTransform>
                         </component:RoundedButton.RenderTransform>
                     </component:RoundedButton>
-                    <TextBlock Text="Subtotal :" FontSize="16" RenderTransformOrigin="0.374,0.521" Width="221">
-               <TextBlock.RenderTransform>
-                   <TranslateTransform X="-80" Y="520"></TranslateTransform>
-               </TextBlock.RenderTransform>
-           </TextBlock>
-           
-           <TextBlock x:Name="TotalPriceTxtBlock" Text="RP ........." FontSize="16" FontWeight="SemiBold" Margin="0 0 0 0">
-               <TextBlock.RenderTransform>
-                   <TranslateTransform X="0" Y="500"></TranslateTransform>
-               </TextBlock.RenderTransform>
-           </TextBlock>
-                </StackPanel>
-                </Border>
+                  
+            </StackPanel>
+            </Border>
                 
         
-        <Button Width="160" Margin="90,0,0,300" HorizontalAlignment="Left">
-            <Button.RenderTransform>
-                <TranslateTransform Y="-780"></TranslateTransform>
-            </Button.RenderTransform>
-            <TextBlock> Back To Shop!</TextBlock>
-        </Button>
+       
 
         
         <!--card section-->

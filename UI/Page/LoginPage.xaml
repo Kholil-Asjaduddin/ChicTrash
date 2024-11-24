@@ -45,14 +45,10 @@
             </component:RoundedButton.RenderTransform>
         </component:RoundedButton>
         
-        <component:HyperlinkButton ForegroundColor="#2BC499" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Text="Forgot Password?" Grid.Row="0" Click="TestClick">
-            <component:HyperlinkButton.RenderTransform>
-                <TranslateTransform X="-210" Y="420"></TranslateTransform>
-            </component:HyperlinkButton.RenderTransform>
-        </component:HyperlinkButton>
+        
         <component:HyperlinkButton ForegroundColor="#2BC499" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Text="Don't Have An Account?" Grid.Row="0" Click="TestClick">
             <component:HyperlinkButton.RenderTransform>
-                <TranslateTransform X="-210" Y="445"></TranslateTransform>
+                <TranslateTransform X="-210" Y="420"></TranslateTransform>
             </component:HyperlinkButton.RenderTransform>
         </component:HyperlinkButton>
     </Grid>
