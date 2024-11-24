@@ -47,7 +47,7 @@
               Width="575"/>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0" Width="586" HorizontalAlignment="Center">
                 <component:RoundedButton  ButtonText="Add to Cart" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="25" FontWeight="DemiBold" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" Click="RoundedButton_OnClick" Loaded="RoundedButton_Loaded_1"/>
-                <component:RoundedButton ButtonText="Buy Now" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="26" FontWeight="DemiBold" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" Click="RoundedButton_OnClick" RenderTransformOrigin="0.504,0.644" Margin="50,0,0,0"/>
+                <component:RoundedButton ButtonText="Buy Now" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="26" FontWeight="DemiBold" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" Click="RoundedButton1_OnClick" RenderTransformOrigin="0.504,0.644" Margin="50,0,0,0"/>
             </StackPanel>
         </StackPanel>
     </Grid>
