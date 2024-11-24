@@ -7,22 +7,21 @@
       xmlns:component="clr-namespace:ChicTrash.UI.Component"
       mc:Ignorable="d"
       Title="ArticlePage" Height="1080" Width="1720">
-    <Grid>
+    <StackPanel>
         <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" Height="700">
             <ScrollViewer.RenderTransform>
-                <TranslateTransform Y="-100"></TranslateTransform>
+                <TranslateTransform></TranslateTransform>
             </ScrollViewer.RenderTransform>
-            <WrapPanel ItemWidth="900" ItemHeight="500" Width="960" Height="1000">
+            <WrapPanel x:Name="ArticleWrapPanel" Loaded="ArticleWrapPanel_OnLoaded" ItemWidth="900" ItemHeight="500" Width="960" >
                 <WrapPanel.RenderTransform>
                     <TranslateTransform X="-110" ></TranslateTransform>
                 </WrapPanel.RenderTransform>
                 <!-- Example cards with Margin for spacing -->
-                <component:ItemCard Margin="10" />
-                <component:ItemCard Margin="10" />
+                
 
                 
                 <!-- Add more cards as needed -->
             </WrapPanel>
         </ScrollViewer>
-    </Grid>
+    </StackPanel>
 </Page>

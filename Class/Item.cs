@@ -15,6 +15,9 @@ namespace ChicTrash
         private string _description;
         private double _price;
         private int _quantity;
+        private string _image;
+        private Guid? _sellerId;
+        private Guid? _customerId;
 
         public int ItemId
         {
@@ -45,6 +48,21 @@ namespace ChicTrash
         {
             get { return _quantity; }
             set { _quantity = value; }
+        }
+        public string Image
+        {
+            get { return _image; }
+            set { _image = value; }
+        }
+        public Guid? SellerId
+        {
+            get { return _sellerId; }
+            set { _sellerId = value; }
+        }
+        public Guid? CustomerId
+        {
+            get { return _customerId; }
+            set { _customerId = value; }
         }
     }
 }

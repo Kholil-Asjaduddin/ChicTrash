@@ -49,16 +49,39 @@
                 <TranslateTransform X="120" Y="170" />
             </component:RoundedTextBox.RenderTransform>
         </component:RoundedTextBox>
+        <component:RoundedTextBox x:Name="AddressTxtBox" HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Address" Height="40">
+            <component:RoundedTextBox.RenderTransform>
+                <TranslateTransform X="120" Y="220" />
+            </component:RoundedTextBox.RenderTransform>
+        </component:RoundedTextBox>
+        <component:RoundedTextBox x:Name="PhoneTxtBox" HorizontalAlignment="Left" Margin="50,0,0,0"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Grid.Row="1" Width="200" Placeholder="Phone Number" Height="40">
+            <component:RoundedTextBox.RenderTransform>
+                <TranslateTransform X="120" Y="270" />
+            </component:RoundedTextBox.RenderTransform>
+        </component:RoundedTextBox>
+        
+        <RadioButton Grid.Row="0" x:Name="RadioButton_Seller" Content="Seller" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins">
+            <RadioButton.RenderTransform>
+                <TranslateTransform X="210" Y="580"></TranslateTransform>            
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        
+        <RadioButton Grid.Row="0" x:Name="RadioButton_Buyer" Content="Buyer" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins">
+            <RadioButton.RenderTransform>
+                <TranslateTransform X="270" Y="580"></TranslateTransform>            
+            </RadioButton.RenderTransform>
+        </RadioButton>
+
         
         <component:RoundedButton ButtonText="Register" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" FontSize="28" FontWeight="DemiBold" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" Click="RoundedButton_OnClick">
             <component:RoundedButton.RenderTransform>
-                <TranslateTransform X="-210" Y="410"></TranslateTransform>
+                <TranslateTransform X="-210" Y="540"></TranslateTransform>
             </component:RoundedButton.RenderTransform>
         </component:RoundedButton>
         
         <component:HyperlinkButton ForegroundColor="#2BC499" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins" Text="Already Have An Account?" Grid.Row="0" Click="RoundedButton_OnClick">
             <component:HyperlinkButton.RenderTransform>
-                <TranslateTransform X="-210" Y="450"></TranslateTransform>
+                <TranslateTransform X="-210" Y="590"></TranslateTransform>
             </component:HyperlinkButton.RenderTransform>
         </component:HyperlinkButton>
         

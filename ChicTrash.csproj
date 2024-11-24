@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="UI\Fonts\Password\" />
     <Folder Include="UI\Images\" />
   </ItemGroup>
 
@@ -116,8 +117,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="Npgsql" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="UI\Images\money-svgrepo-com.png" />
+    <Resource Include="UI\Images\money-svgrepo-com.png" />
+    <None Remove="UI\Images\cross-svgrepo-com.png" />
+    <Resource Include="UI\Images\cross-svgrepo-com.png" />
+    <None Remove="UI\Images\pencil-svgrepo-com.png" />
+    <Resource Include="UI\Images\pencil-svgrepo-com.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

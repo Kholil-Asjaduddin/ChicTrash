@@ -10,46 +10,39 @@ namespace ChicTrash.UI.Page;
 public partial class LoginPage : System.Windows.Controls.Page
 {
     private readonly Action<System.Windows.Controls.Page> _navigate;
-    public static string connstring = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING");
-    public NpgsqlConnection conn = new NpgsqlConnection(connstring);
-
-    public LoginPage(Action<System.Windows.Controls.Page> navigate)
+    private readonly DatabaseService _dbService;
+    public LoginPage(DatabaseService dbService, Action<System.Windows.Controls.Page> navigate)
     {
         InitializeComponent();
+        _dbService = dbService;
         _navigate = navigate;
-
     }
 
     private void RoundedButton_OnClick(object sender, RoutedEventArgs e)
     {
-        conn.Open();
-        NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM user_table WHERE email = @email AND password = @password", conn);
-        try
+        if (_dbService.ValidateUser(EmailTxtBox.Text, PasswordTxtBox.Text))
         {
-            cmd.Parameters.AddWithValue("email", EmailTxtBox.Text);
-            cmd.Parameters.AddWithValue("password", PasswordTxtBox.Text);
-            if (cmd.ExecuteScalar() != null)
+            try
             {
-                Home Home = new Home();
-                Home.Show();
-                conn.Close();
+                Application.Current.Windows.OfType<Home>().FirstOrDefault()?
+                    .SetUserRole(_dbService.GetUserIdByEmail(EmailTxtBox.Text));
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Email or password is incorrect");
+                MessageBox.Show(ex.Message);
             }
 
+            Application.Current.Windows.OfType<Home>().FirstOrDefault()?.ContentFrame.Navigate(new HomePage());
             
         }
-        catch (Exception ex)
+        else
         {
-            MessageBox.Show(ex.Message);
-            conn.Close();
+            MessageBox.Show("Email or password is incorrect");
         }
     }
 
     private void TestClick(object sender, RoutedEventArgs e)
     {
-        _navigate(new RegisterPage(_navigate));
+        Application.Current.Windows.OfType<Home>().FirstOrDefault().ContentFrame.Navigate(new RegisterPage(_navigate, _dbService));
     }
 }

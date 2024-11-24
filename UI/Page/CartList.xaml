@@ -6,118 +6,122 @@
       xmlns:local="clr-namespace:ChicTrash.UI.Page"
       xmlns:component="clr-namespace:ChicTrash.UI.Component"
       mc:Ignorable="d"
-      Title="CartList" Height="700" Width="1180">
+      Title="CartList" Height="1080" Width="1720">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="300"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <StackPanel>
+        
 
         <!--title bar-->
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Background="#444444" Panel.ZIndex="1" FlowDirection="RightToLeft" MouseDown="StackPanel_MouseDown">
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Panel.ZIndex="1" FlowDirection="RightToLeft" MouseDown="StackPanel_MouseDown">
             <Button>
                 <Image/>
             </Button>
         </StackPanel>
 
         <!--product sectiont-->
-        <Grid Grid.Row ="1" Background="#ecf0f1" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+        
 
             <!--title-->
             <StackPanel Orientation="Horizontal" Margin="0,40,0,30">
                 <TextBlock Text="ChichTrash"  FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf" FontSize="28" FontWeight="SemiBold" VerticalAlignment="Center" Margin="50 0 0 0"/>
                 <Rectangle VerticalAlignment="Stretch" Fill="#808080" Width="0.7" Margin ="20,5,20,5"/>
                 <TextBlock Text="Your Shopping Cart" FontSize="25" VerticalAlignment="Center"  FontWeight="SemiBold"/>
+                <TextBlock Text="Test"></TextBlock>
             </StackPanel>
 
             <!--Product-->
-            <StackPanel Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="400">
+            <StackPanel x:Name="ItemPanel" Grid.Column="0" Grid.Row="1" Loaded="ItemPanel_OnLoaded">
+                
 
+                
             </StackPanel>
+            </ScrollViewer>
             
             <!--bottom section-->
-            <Grid Grid.Row="2" Margin="80 49 150 40">
-                <Button Margin="0,0,310,0">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Width="20"/>
-                        <TextBlock Text="Back to Shop" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                    </StackPanel>
-                </Button>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBlock Text="Subtotal :" FontSize="16" RenderTransformOrigin="0.374,0.521" Width="221"/>
-                    <TextBlock Text="RP ........." FontSize="16" FontWeight="SemiBold" Margin="30 0 0 0"/>
-                </StackPanel> 
-            </Grid>
-        </Grid>
+            <Border Width="500" Height="820" Background="#00BEBE">
+                <Border.RenderTransform>
+                    <TranslateTransform X="220" Y="-500"></TranslateTransform>
+                </Border.RenderTransform>
+                <StackPanel HorizontalAlignment="Right">
+                    <component:RoundedButton ButtonText="Checkout" x:Name="CheckoutButton" Click="CheckoutButton_OnClick" ButtonBackground="#96CBBC" ButtonBackgroundHover="#18A179" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf">
+                        <component:RoundedButton.RenderTransform>
+                            <TranslateTransform X="-120" Y="500"></TranslateTransform>
+                        </component:RoundedButton.RenderTransform>
+                    </component:RoundedButton>
+                    <TextBlock Text="Subtotal :" FontSize="16" RenderTransformOrigin="0.374,0.521" Width="221">
+               <TextBlock.RenderTransform>
+                   <TranslateTransform X="-80" Y="520"></TranslateTransform>
+               </TextBlock.RenderTransform>
+           </TextBlock>
+           
+           <TextBlock x:Name="TotalPriceTxtBlock" Text="RP ........." FontSize="16" FontWeight="SemiBold" Margin="0 0 0 0">
+               <TextBlock.RenderTransform>
+                   <TranslateTransform X="0" Y="500"></TranslateTransform>
+               </TextBlock.RenderTransform>
+           </TextBlock>
+                </StackPanel>
+                </Border>
+                
+        
+       
         
         <!--card section-->
 
-        <Grid Grid.Column="1" Background="#4b4643" Grid.Row="1">
-            <Grid.Effect>
-                <DropShadowEffect ShadowDepth="10" BlurRadius="50"/>
-            </Grid.Effect>
-            <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="130" Margin="30 50 0 0" Background="#4b4643" CornerRadius="10 0 0 0" Padding="10 20 5 20">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Ellipse Width="8" Height="8" Fill="#8b8a89" Grid.Row="0"/>
-                    <Ellipse Width="8" Height="8" Fill="#f1c40f" Grid.Row="1"/>
-                    <Ellipse Width="8" Height="8" Fill="#8b8a89" Grid.Row="2"/>
-                </Grid>
-            </Border>
-
-            <!--input-->
-            <StackPanel VerticalAlignment="Top" Margin="50 100 50 0">
-                <TextBlock Text="CARD DETAIL" FontSize="24" FontWeight="SemiBold" Margin="20 0 0 60" Foreground="#FFFFFF"/>
-                <TextBlock Text="Select CARD TYPE" />
-
-                <Grid Margin="0 15 0 30">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" HorizontalAlignment="Left" Source="K:\ChicTrash_app\UI\Images\home-4-svgrepo-com.png" Width="25"/>
-                    <Image Grid.Column="1" HorizontalAlignment="Center" Source="K:\ChicTrash_app\UI\Images\home-4-svgrepo-com.png" Width="25"/>
-                    <Image Grid.Column="2" HorizontalAlignment="Right" Source="K:\ChicTrash_app\UI\Images\home-4-svgrepo-com.png" Width="25"/>
-                </Grid>
-
-                <TextBlock Text="CARD NUMBER"/>
-                <TextBox Margin="0 5 0 30"/>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel>
-                        <TextBlock Text="EXPIRE DATE"/>
-                        <TextBox Margin="0 5 0 0"/>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1" Margin="30 0 0 0" Width="50">
-                        <TextBlock Text="CVV"/>
-                        <TextBox Margin="0 5 0 0"/>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-            <Button Content="Checkout" Margin="0,596,0,0"/>
-        </Grid> 
-    </Grid>
+        <!-- <Grid Grid.Column="1" Background="#18A179" Grid.Row="1"> -->
+        <!--     <Grid.Effect> -->
+        <!--         <DropShadowEffect ShadowDepth="10" BlurRadius="50"/> -->
+        <!--     </Grid.Effect> -->
+        <!--     <Border HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="130" Margin="0 ,50, 300, 0" Background="#4b4643" CornerRadius="10 0 0 0" Padding="10 20 5 20"> -->
+        <!--         <Grid> -->
+        <!--             <Grid.RowDefinitions> -->
+        <!--                 <RowDefinition Height="*"/> -->
+        <!--                 <RowDefinition Height="*"/> -->
+        <!--                 <RowDefinition Height="*"/> -->
+        <!--             </Grid.RowDefinitions> -->
+        <!--             <Ellipse Width="8" Height="8" Fill="#8b8a89" Grid.Row="0"/> -->
+        <!--             <Ellipse Width="8" Height="8" Fill="#f1c40f" Grid.Row="1"/> -->
+        <!--             <Ellipse Width="8" Height="8" Fill="#8b8a89" Grid.Row="2"/> -->
+        <!--         </Grid> -->
+        <!--     </Border> -->
+        <!-- -->
+        <!--     ~1~input@1@ -->
+        <!--     <StackPanel VerticalAlignment="Top" Margin="50 100 50 0"> -->
+        <!--         <TextBlock Text="CARD DETAIL" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf" FontSize="24" FontWeight="SemiBold" Margin="20 0 0 60" Foreground="#FFFFFF"/> -->
+        <!--         <TextBlock Text="Select CARD TYPE" FontFamily="pack://application:,,,/UI/Fonts/Poppins/#Poppins-Bold.ttf" /> -->
+        <!-- -->
+        <!--         <Grid Margin="0 15 0 30"> -->
+        <!--             <Grid.ColumnDefinitions> -->
+        <!--                 <ColumnDefinition Width="*"/> -->
+        <!--                 <ColumnDefinition Width="*"/> -->
+        <!--                 <ColumnDefinition Width="*"/> -->
+        <!--             </Grid.ColumnDefinitions> -->
+        <!--             <Image Grid.Column="0" HorizontalAlignment="Left" Source="K:\ChicTrash_app\UI\Images\home-4-svgrepo-com.png" Width="25"/> -->
+        <!--             <Image Grid.Column="1" HorizontalAlignment="Center" Source="K:\ChicTrash_app\UI\Images\home-4-svgrepo-com.png" Width="25"/> -->
+        <!--             <Image Grid.Column="2" HorizontalAlignment="Right" Source="K:\ChicTrash_app\UI\Images\home-4-svgrepo-com.png" Width="25"/> -->
+        <!--         </Grid> -->
+        <!-- -->
+        <!--         <TextBlock Text="Saldo"/> -->
+        <!--         <TextBox Margin="0 5 0 30"/> -->
+        <!-- -->
+        <!--         <Grid> -->
+        <!--             <Grid.ColumnDefinitions> -->
+        <!--                 <ColumnDefinition Width="*"/> -->
+        <!--                 <ColumnDefinition Width="auto"/> -->
+        <!--             </Grid.ColumnDefinitions> -->
+        <!-- -->
+        <!--             <StackPanel> -->
+        <!--                 <TextBlock Text="EXPIRE DATE"/> -->
+        <!--                 <TextBox Margin="0 5 0 0"/> -->
+        <!--             </StackPanel> -->
+        <!-- -->
+        <!--             <StackPanel Grid.Column="1" Margin="30 0 0 0" Width="50"> -->
+        <!--                 <TextBlock Text="CVV"/> -->
+        <!--                 <TextBox Margin="0 5 0 0"/> -->
+        <!--             </StackPanel> -->
+        <!--         </Grid> -->
+        <!--     </StackPanel> -->
+        <!--     <Button Content="Checkout" Margin="0,596,0,0"/> -->
+        <!-- </Grid>  -->
+    </StackPanel>
 </Page>
