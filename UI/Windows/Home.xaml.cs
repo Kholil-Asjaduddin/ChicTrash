@@ -30,6 +30,7 @@ public partial class Home : Window
 
     private void IconButton_OnClick(object sender, RoutedEventArgs e)
     {
+        SetUserRole(CurrentUser.UserUserId);
         ContentFrame.Navigate(new HomePage());
 
     }
