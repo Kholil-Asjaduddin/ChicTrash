@@ -51,7 +51,7 @@ namespace ChicTrash.UI.Page
 
         private void CheckoutButton_OnClick(object sender, RoutedEventArgs e)
         {
-            _dbService.checkoutItems(cartItemIds, totalPrice); // Pass only cartItemIds and totalPrice to checkoutItems
+            _dbService.CheckoutItems(cartItemIds, totalPrice); // Pass only cartItemIds and totalPrice to checkoutItems
             MessageBox.Show("Item Successfully Checked");
         }
     }

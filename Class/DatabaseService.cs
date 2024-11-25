@@ -1,7 +1,4 @@
-﻿using System;
-using Npgsql;
-using System.Data;
-using System.Data.SqlClient;
+﻿using Npgsql;
 using System.Windows;
 using DotNetEnv;
 
@@ -155,11 +152,10 @@ namespace ChicTrash
             try
             {
                 conn.Open();
-                using var cmd =
-                    new NpgsqlCommand(
-                        "SELECT cart.item_id, cart.quantity, item_name, category, description, price, image FROM cart JOIN item ON item.item_id = cart.item_id AND user_id = @user_id;",
-                        conn);
-                cmd.Parameters.AddWithValue("userId", userId);
+                using var cmd = new NpgsqlCommand(
+                    "SELECT c.item_id, c.quantity, i.item_name, i.category, i.description, i.price, i.image FROM cart c JOIN item i ON i.item_id = c.item_id WHERE c.user_id = @user_id;",
+                    conn);
+                cmd.Parameters.AddWithValue("user_id", userId);
                 using var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -284,100 +280,119 @@ namespace ChicTrash
             return false;
         }
 
-        public void checkoutItems(List<int> cartItemIds, double totalPrice)
-{
-    using var conn = GetConnection();
-    conn.Open();
-    try
-    {
-        // Ambil user_id dari salah satu item di cart
-        int userId = -1;
-        using (var cmd = new NpgsqlCommand("SELECT user_id FROM cart WHERE item_id = @ItemId LIMIT 1", conn))
+        public void CheckoutItems(List<int> cartItemIds, double totalPrice)
         {
-            cmd.Parameters.AddWithValue("ItemId", cartItemIds.First());
-            userId = (int)cmd.ExecuteScalar();
-        }
-
-        if (userId != -1)
-        {
-            // Mengambil list item_id, quantity, dan seller_id dari cartItemIds
-            List<(int itemId, int quantity, int sellerUserId)> cartItems = new List<(int itemId, int quantity, int sellerUserId)>();
-            foreach (var itemId in cartItemIds)
+            if (cartItemIds == null || cartItemIds.Count == 0)
             {
-                // Akses semua record pada tabel item dengan item_id yang sesuai
-                using (var cmd = new NpgsqlCommand(
-                           "SELECT c.item_id, c.quantity, i.seller_id FROM cart c JOIN item i ON c.item_id = i.item_id WHERE c.user_id = @UserId AND c.item_id = @ItemId",
-                           conn))
+                MessageBox.Show("Cart is empty or invalid.");
+                return;
+            }
+
+            using var conn = GetConnection();
+            conn.Open();
+
+            using var transaction = conn.BeginTransaction(); // Start a transaction for atomic operations
+            try
+            {
+                // Retrieve the user_id from the first item in the cart
+                int userId = GetUserIdFromCart(cartItemIds.First(), conn);
+                if (userId == -1)
                 {
-                    cmd.Parameters.AddWithValue("UserId", userId);
-                    cmd.Parameters.AddWithValue("ItemId", itemId);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            int itemSellerId = reader.GetInt32(reader.GetOrdinal("seller_id"));
-
-                            // Gunakan seller_id tersebut untuk mengakses user_table
-                            int sellerUserId;
-                            using (var cmdUser = new NpgsqlCommand("SELECT user_id FROM user_table WHERE seller_id = @SellerId", conn))
-                            {
-                                cmdUser.Parameters.AddWithValue("SellerId", itemSellerId);
-                                sellerUserId = (int)cmdUser.ExecuteScalar();
-                            }
-
-                            // Tambahkan data yang diperlukan ke list cartItems
-                            cartItems.Add((reader.GetInt32(reader.GetOrdinal("item_id")),
-                                reader.GetInt32(reader.GetOrdinal("quantity")), sellerUserId));
-                        }
-                    }
+                    throw new Exception("Invalid cart item. User ID not found.");
                 }
-            }
 
-            // Insert record baru ke order_table
-            foreach (var (itemId, quantity, sellerUserId) in cartItems)
-            {
-                using (var cmd = new NpgsqlCommand(
-                           "INSERT INTO order_table (customer_id, seller_id, item_id, quantity) VALUES (@CustomerId, @SellerId, @ItemId, @Quantity)",
-                           conn))
+                // Retrieve all cart item details (item_id, quantity, seller_id)
+                var cartItems = GetCartItemsDetails(userId, cartItemIds, conn);
+                if (cartItems.Count == 0)
                 {
-                    cmd.Parameters.AddWithValue("CustomerId", userId);
-                    cmd.Parameters.AddWithValue("SellerId", sellerUserId);
-                    cmd.Parameters.AddWithValue("ItemId", itemId);
-                    cmd.Parameters.AddWithValue("Quantity", quantity);
-                    cmd.ExecuteNonQuery();
+                    throw new Exception("No valid items found in the cart.");
                 }
-            }
 
-            // Mengurangi uang pengguna sebesar harga total item di keranjang
-            using (var cmd = new NpgsqlCommand(
-                       "UPDATE user_table SET money = money - @price WHERE user_id = @user_id", conn))
+                // Insert orders into order_table
+                foreach (var (itemId, quantity, sellerUserId) in cartItems)
+                {
+                    InsertOrder(userId, sellerUserId, itemId, quantity, conn);
+                }
+
+                // Deduct user balance
+                UpdateUserBalance(userId, totalPrice, conn);
+
+                // Clear user's cart
+                ClearCart(userId, conn);
+
+                transaction.Commit();
+                MessageBox.Show("Items successfully checked out!");
+            }
+            catch (Exception ex)
             {
-                cmd.Parameters.AddWithValue("user_id", userId);
-                cmd.Parameters.AddWithValue("price", totalPrice);
-                cmd.ExecuteNonQuery();
+                transaction.Rollback(); // Rollback transaction in case of an error
+                MessageBox.Show($"Checkout failed: {ex.Message}");
             }
-
-            // Mengosongkan keranjang belanja pengguna setelah checkout
-            using (var cmd = new NpgsqlCommand("DELETE FROM cart WHERE user_id = @user_id", conn))
-            {
-                cmd.Parameters.AddWithValue("user_id", userId);
-                cmd.ExecuteNonQuery();
-            }
-
-            MessageBox.Show("Item Successfully Checked");
         }
-        else
+
+        // Retrieves the user_id from the cart
+        private int GetUserIdFromCart(int itemId, NpgsqlConnection conn)
         {
-            throw new Exception("User ID tidak ditemukan di cart.");
+            using var cmd = new NpgsqlCommand("SELECT user_id FROM cart WHERE item_id = @ItemId LIMIT 1", conn);
+            cmd.Parameters.AddWithValue("ItemId", itemId);
+            return (int?)cmd.ExecuteScalar() ?? -1;
         }
-    }
-    catch (Exception e)
-    {
-        // Menangani kesalahan dan menampilkan pesan kesalahan
-        MessageBox.Show(e.Message);
-    }
-}
 
+        // Retrieves cart item details (item_id, quantity, seller_user_id)
+        private List<(int itemId, int quantity, int sellerUserId)> GetCartItemsDetails(int userId, List<int> cartItemIds, NpgsqlConnection conn)
+        {
+            var cartItems = new List<(int itemId, int quantity, int sellerUserId)>();
+            using var cmd = new NpgsqlCommand(@"
+                SELECT c.item_id, c.quantity, u.user_id AS seller_user_id
+                FROM cart c
+                JOIN item i ON c.item_id = i.item_id
+                JOIN user_table u ON i.seller_id = u.seller_id
+                WHERE c.user_id = @UserId AND c.item_id = ANY(@ItemIds)", conn);
+            cmd.Parameters.AddWithValue("UserId", userId);
+            cmd.Parameters.AddWithValue("ItemIds", cartItemIds.ToArray());
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                cartItems.Add((
+                    reader.GetInt32(reader.GetOrdinal("item_id")),
+                    reader.GetInt32(reader.GetOrdinal("quantity")),
+                    reader.GetInt32(reader.GetOrdinal("seller_user_id"))
+                ));
+            }
+            return cartItems;
+        }
+
+        // Inserts a single order into the order_table
+        private void InsertOrder(int customerId, int sellerId, int itemId, int quantity, NpgsqlConnection conn)
+        {
+            using var cmd = new NpgsqlCommand(@"
+                INSERT INTO order_table (customer_id, seller_id, item_id, quantity)
+                VALUES (@CustomerId, @SellerId, @ItemId, @Quantity)", conn);
+            cmd.Parameters.AddWithValue("CustomerId", customerId);
+            cmd.Parameters.AddWithValue("SellerId", sellerId);
+            cmd.Parameters.AddWithValue("ItemId", itemId);
+            cmd.Parameters.AddWithValue("Quantity", quantity);
+            cmd.ExecuteNonQuery();
+        }
+
+        // Deducts total price from the user's balance
+        private void UpdateUserBalance(int userId, double totalPrice, NpgsqlConnection conn)
+        {
+            using var cmd = new NpgsqlCommand("UPDATE user_table SET money = money - @TotalPrice WHERE user_id = @UserId", conn);
+            cmd.Parameters.AddWithValue("UserId", userId);
+            cmd.Parameters.AddWithValue("TotalPrice", totalPrice);
+            cmd.ExecuteNonQuery();
+        }
+
+        // Clears the cart for the specified user
+        private void ClearCart(int userId, NpgsqlConnection conn)
+        {
+            using var cmd = new NpgsqlCommand("DELETE FROM cart WHERE user_id = @UserId", conn);
+            cmd.Parameters.AddWithValue("UserId", userId);
+            cmd.ExecuteNonQuery();
+        }
+        
         public List<Article> GetArticles()
         {
             List<Article> articles = new List<Article>();
